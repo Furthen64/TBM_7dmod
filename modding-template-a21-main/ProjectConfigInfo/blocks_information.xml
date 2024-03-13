@@ -1,0 +1,1714 @@
+<blocks_information>
+
+All blocks are laid out as such:
+<block name="itemName">
+	<!-- Basic Block Properties (Some are required, as many as needed) -->
+	<property name="" value=""/>
+	
+	<!-- Block repair event (Optional) -->
+	<property class="RepairItems">
+		<!-- One property for each item that needs to repair. -->
+		<property name="" value=""/>
+	</property>
+	
+	<!-- Upgrade event (Optional) -->
+	<property class="UpgradeBlock">
+		<property name="ToBlock" value=""/>
+		<property name="Item" value=""/>
+		<property name="ItemCount" value="1"/>
+		<property name="UpgradeHitCount" value="1"/>
+	</property>
+	
+	<!-- Drop events (Optional) -->
+	<drop event="" name="" count="" prob="" stick_chance="" tag="" />
+</block>
+
+
+
+BASIC BLOCK PROPERTIES
+All blocks can specify properties that gives them common attributes such as their material, shape, texture, if they scrap to anything, their sell value, buffs when stepped on, etc. Below is a list of item properties that all items can specify.
+
+<property name="Extends" value="" param1=""/>
+<!-- 
+This tells the block to inherit ALL* the properties from another block that has already been defined. You can extend from any block as long as that block comes first in the XML load order (as block IDs are defined in order and then extended properties get mapped to the original ID. If you are going to use Extends, it is good practice to make sure you always have this as your very first property, as if you define Extends after some properties, it may overwrite them.
+
+The value attribute must be the name of another block that has already been defined.
+
+The param1 attribute is optional. It is used to specify the list of properties that you do NOT want extended. Write a comma-separated list of the property names.
+
+* The property 'CreativeMode' is never carried over to extended blocks.
+-->
+
+<property name="CreativeMode" value="" />
+<!-- 
+This is used to show whether the block will show up in creative mode or not. It can be one of the following values:
+- None: The block never shows up in creative mode.
+- Player: The block will show up as normal in the player creative mode.
+- Dev: The block will show up in the player creative mode as long as dev blocks are enabled.
+- Test: The block only shows up in the creative mode if the game is running in Unity (used by the devs for test blocks that should probably not be used in the game).
+-->
+
+<property name="DescriptionKey" value=""/>
+<!-- This is used if you want to specify a different localization key for the block's description, for example if you have a group of blocks that should all share a description. By default, an block with name "blockName" has a description key of "blockNameDesc" but this property can override it. -->
+
+<property name="UnlockedBy" value=""/>
+<!-- If this block is learnable, specify this so the player can see which perks unlock it. You can specify item names and skill/perk names as seen in progression.xml, in the case your recipe is unlocked by using an item. -->
+
+<property name="Tags" value=""/>
+<!-- A comma-separated list of tags that this block has. Tags are used to influence how things like perks and buffs affect their use or stats. -->
+
+<property name="IndexName" value=""/>
+<!-- Used for quests when the block needs to show up on the UI. -->
+
+<property name="IsPlant" value="true"/>
+<!-- If this property is included and set to true, the biome decorator will only place this block on ground with fertile level greater than zero. -->
+
+<property name="CanPlayersSpawnOn" value="true"/>
+<!-- If set to false, players will not be able to spawn on this block. Used for things like trees to make sure players don't spawn halfway up a tree or something. -->
+
+<property name="CanMobsSpawnOn" value="true"/>
+<!-- If set to false, zombies and other entities won't be able to spawn on this block. -->
+
+<property name="LightOpacity" value="0"/>
+<!-- Whether this block lets light pass through it or if it is fully opaque. -->
+
+<property name="CustomIcon" value=""/>
+<!-- If the block should use the same icon as another block already defined, you can specify the name of that block. By default, CustomIcon is the same as the block name. -->
+
+<property name="CustomIconTint" value="FFFFFF"/>
+<!-- 
+If the icon should be tinted to be a different colour. The value needs to be a 3 or 6 digit hex code where each digit is a hex value, ie 0123456789ABCDEF.
+
+If using 3 digits:
+- The 1st digit defines the red tint. 0 is no tint, F is maximum.
+- The 2nd digit defines the green tint. 0 is no tint, F is maximum.
+- The 3rd digit defines the blue tint. 0 is no tint, F is maximum.
+
+If using 6 digits:
+- The 1st and 2nd digits define the red tint. 00 is no tint, FF is maximum.
+- The 3rd and 4th digits define the green tint. 00 is no tint, FF is maximum.
+- The 5th and 6th digits define the blue tint. 00 is no tint, FF is maximum.
+-->
+
+<property name="ItemTypeIcon" value=""/>
+<!-- The icon that should be shown in the corner of the window next to the main block icon. Appends ui_game_symbol_ to the value, so putting in 'book' would mean the icon selected would be 'ui_game_symbol_book'. -->
+
+<property name="UiBackgroundTexture" value="0"/>
+<!-- If this is specified, this is the texture that is displayed in the UI behind the block icon. -->
+
+<property name="DisplayType" value=""/>
+<!-- This is used to show what information is displayed about the block when you view its stats. All DisplayTypes can be found in ui_display.xml and you can add your own for special blocks. -->
+
+<property name="UpgradeSound" value=""/>
+<!-- The sound that plays when the block gets upgraded to the next stage. -->
+
+<property name="DropMeshfile" value=""/>
+<!-- 
+Path to the mesh file for the block - what it looks like when it is dropped into the world but NOT placed as the block, i.e. if you go into your inventory and drop it.
+
+Vanilla paths @:AssetFolder/Path/To/Mesh.prefab
+Modded paths #@modfolder:Path/To/AssetBundle.unity3d?Mesh.prefab
+-->
+
+<property name="DropScale" value="1.0"/>
+<!-- When dropped, the mesh is resized by this amount. -->
+
+<property name="Shape" value="New" />
+<!-- 
+What shape the block takes on. This one has some predefined shapes that need to be specified and depending on what you choose will influence other properties that need to be defined.
+
+Shapes you can specify:
+- Invisible
+	The block will not appear or be rendered. Used for air blocks. The following properties also need to be specified for this:
+	- Texture
+- New
+	This is ued to specify one of the many custom block shapes in the game used primarily for all buildings. If you specify New, you need to specify a list of shapes as an attribute on the block element. You can use 'All' for all shapes, or define a comma-separated list of them. The following properties also need to be specified in addition to this:
+	- Texture
+- Terrain
+	The diamond-shaped terrain blocks used for dirt, sand, snow, gravel and ores. The following properties need to be defined in addition to this:
+	- TerrainIndex
+	- Map.Color
+	- Mesh
+	- Texture
+- Water
+	Whether the block acts as a water or liquid block. The following properties need to be defined in addition to this:
+	- Map.Color
+	- Mesh
+	- Texture
+- BillboardPlant
+	This is used for instanced things like small shrubs. The following properties need to be specified in addition to this:
+	- Mesh
+	- Texture
+- Grass / GrassShort
+	Used for all instanced grasses. The following properties need to be specified in addition to this:
+	- Mesh
+	- Texture
+- ModelEntity / DistantDeco / DistantDecoTree
+	Used for objects that have their own unique model. Many things such as trees, furniture blocks, corpse blocks, crops, and others use this.
+	- If your object does not need to render in the distance, such as most POI decorations, interior blocks, workbenches, etc, use ModelEntity.
+	- If your object needs to show up in the distance and is a small block such as a cactus or other small plant, use DistantDeco.
+	- If your object is a tree or large plant that needs to show up in the distance, use DistantDecoTree.
+	The following properties need to be specified in addition to this:
+	- Model
+	- Texture
+-->
+
+<property name="Map.Color" value="255,255,255" />
+<!-- Three comma-separated values showing what colour the block will appear as when viewed on the map, dictating Red, Green and Blue values. 0,0,0 is all black, 255,255,255 is all white. -->
+
+<property name="TerrainIndex" value="0" />
+<!--
+This is used for terrain blocks to dictate how they show up in the distance, acting as a sort of override. The following values are possible:
+- 0		Ice and snow
+- 1 	Stone
+- 2 	Grassy terrain like forest ground cover
+- 3		Not used (Perhaps pine forest ground from previous alpha?)
+- 4		Road terrain like asphalt
+- 5		Gravel
+- 6		Concrete
+- 7 	Sand and desert ground
+- 8		Not used (Perhaps plains ground from previous alpha?)
+- 9 	Dirt
+- 10 	Ashy ground such as burnt forest ground
+-->
+
+<property name="Mesh" value="" />
+<!--
+The name of the mesh that should be used. Applies to Terrain, Water, Grass, GrassShort and BillboardPlant block shapes and is required if you use any of these shapes in your block class. Can optionally be used with the New shapes as well but there are only a limited number of use cases for this, i.e. glass blocks that don't include all shapes. The following values can be used:
+
+- terrain		Used for terrain blocks, gives the diamond shape
+- water			Used for liquids
+- transparent	Used for glass blocks and ones you can see through
+- opaque		Used for glass blocks you can't see through. Redundant?
+- grass			Used for grass and ground cover
+- cutout		Used for a direct texture cutout with transparency.
+- decals		Used for road cover such as the newspapers you find.
+-->
+
+<property name="Model" value="" />
+<!-- 
+Path to the model file for the block when it is placed in the world. Used if your block specifes the ModelEntity, DistantDeco, or DistantDecoTree property. Also applies for the New shape in special cases.
+
+Vanilla paths @:AssetFolder/Path/To/Mesh.prefab
+Modded paths #@modfolder:Path/To/AssetBundle.unity3d?Mesh.prefab
+-->
+
+<property name="ModelOffset" value="0,0,0"/>
+<!-- An optional comma-separated list of three numbers to specify how far in the X,Y,Z directions the block is offset by when placed in the world. Usually used to correct model positioning when translating from Unity Engine to in-game use. -->
+
+<property name="Texture" value="0" />
+<!--
+A single number or comma-separated list of six numbers to specify the texture of the block when viewed from each side.
+- A single number will texture the entire block in that one texture.
+- Six nummbers will texture the block in the following orientation: TopFace, BottomFace, NorthFace, EastFace, SouthFace, WestFace
+- Six numbers when Shape is Grass or GrassShort and Class is DeadGrass will result in a random texture being chosen when the block is placed in the world, unless GrowOnTop is used (in which case the second value is always used. Weird behaviour...)
+-->
+
+<property name="UseGlobalUV" value="Default" />
+<!--
+Only needed for blocks with the New shape property. Determines how the texture is applied to the block, either on the whole block with one value, or per face of the block with a comma-separated list of six values. 
+
+Global UVs mean that if the block face is flipped or rotated, the texture will not change orientation with the rotation. Local UVs will also swap the orientation when rotated and flipped.
+
+If using a single value, possible values are:
+- Default	Game decides on what UV to apply
+- Local		Use the UV with local UV co-ordinates.
+- Global	Used for textures that span multiple block spaces.
+If using a comma-separated list of six values, possible values are:
+- D			Default
+- L 		Local
+- G 		Global
+-->
+
+<property name="TintColor" value="0,0,0"/>
+<!-- Whether the block is tinted or not. Three comma-separated values between 0 and 255 to determine the red, green and blue tint applied. This only works for blocks that do not specify a Texture, so anything using a Model property and falling under ModelEntity, DistantDeco, or DistantDecoTree. -->
+
+<property name="Material" value=""/>
+<!-- The name of the material this block uses (what it's made out of, essentially). All material names are defined in materials.xml and you can add your own materials. -->
+
+<property name="MaxDamage" value="0" />
+<!-- If this property is specified, the block HP will be set to this, even if the material's max HP is different. Use this for special cases. -->
+
+<property name="StabilitySupport" value="true"/>
+<!-- If this is set to false, the block will not support anything above it. -->
+
+<property name="VehicleHitScale" value="0"/>
+<!-- Setting this value high will make the vehicle take less damage if it hits the block. -->
+
+<property name="MultiBlockDim" value="1,1,1" />
+<!-- If this block takes up more than one block space, define a comma-seprated list of three positive integers to specify how many blocks in the X,Y,Z directions it takes up. -->
+
+<property name="GndAlign" value="1"/>
+<!-- If this is included, the block will align itself to the same orientation as the ground incline. Used for example to make bird nests align properly on steep surfaces. -->
+
+<property name="WaterFlow" value="permitted" />
+<!-- 
+Whether water can flow through this block or not. Used for blocks that don't take up a whole block space and need water to flow around it so that air space does not render there. The possible values can be 'permitted' or a comma-separated list of values to specify the directions of water flow. 
+If using one value, possible values are:
+- permitted		Allows water to flow through all directions of the block
+If using directions, possible values are:
+- T				Water can only flow from the top of the block.
+- B 			Water can only flow from the bottom of the block.
+- N				Water can only flow from the north face of the block.
+- S 			Water can only flow from the south face of the block.
+- E 			Water can only flow from the east face of the block.
+- W 			Water can only flow from the west face of the block.
+-->
+
+<property name="ImposterExchange" value="" param1="0"/>
+<!-- 
+When the player is far away, this is what block is rendered in the distance.
+
+The 'value' attribute needs to be the name of a block (look at the impostor blocks for a list of possible ones to use, they are all in the blocks.xml file).
+
+The 'param1' attribute needs to be the texture ID that is used for the impostor block.
+-->
+
+<property name="ImposterExclude" value="false"/>
+<!-- If this is included and set to true, the block does not swap with an imposter block when moving far away and is invisible and un-collidable outside of render distance. If you're using the DistantDeco or DistantDecoTree shape, this does not need to be included. -->
+
+<property name="ImposterExcludeAndStop" value="false"/>
+<!-- If this is included and set to true the block dows not swap with an imposter block when moving far away and is invisible outside of render distance. However collisions still register at a distance from raycasts. -->
+
+<property name="ImposterDontBlock" value="false"/>
+<!-- If this is included and set to true, the block will not block raycasts when outside of render distance if substituted with an imposter block. -->
+
+<property name="Collide" value="melee" />
+<!-- 
+Specifies what types of collisions can occur between this block and other sources and other HitmaskOverrides. A single value, or a list of values.
+The following values can be specified, and if they are, the following effects occur for collisions.
+- sight		Entities cannot see through the block.
+- movement	Entities cannot walk through the block.
+- melee		Use of punches and melee weapons can damage the block.
+- bullet	Items with a HitmaskOverride of 'bullet' can damage the block.
+- arrow		Items with a HitmaskOverride of 'arrow' can damage the block.
+- rocket	Items with a HitmaskOverride of 'rocket' can damage the block.
+-->
+
+<property name="Path" value="scan"/>
+<!-- 
+Determines whether entities can path over this block. Possible values are:
+- scan		Pathing algorithm will scan this block to path over.
+- solid		Pathing algorithm will treat this as a solid block.
+-->
+
+<property name="RestrictSubmergedPlacement" value="false"/>
+<!-- If set to true this block won't be able to be placed underwater. -->
+
+<property name="IsDecoration" value="false"/>
+<!-- If set to true this marks the block as a decoration, which will be rendered invisible under certain situations (when the GameManager chunk cache is scanning all blocks in the area and excluding decorations). Usually set on workstations and such. -->
+
+<property name="IsTerrainDecoration" value="false"/>
+<!-- If this is set to false or not specified, when this block is placed in the world the terrain under that block will modify itself to meet the height of the block. If set to true, this terrain manipulation behaviour will not happen. -->
+
+<property name="CanDecorateOnSlopes" value="true"/>
+<!-- Whether or not the biome decorator will put this block on steep inclines. Overridden to false if the block class is set to Cactus. -->
+
+<property name="LODCullScale" value="1"/>
+<!-- A value between 0 and 1 to determine if the block should cull earlier in the LOD group when moving away from it. Essentially setting this value lower means the block will disappear from rendering earlier. -->
+
+<property name="Place" value="TowardsPlacerInverted" />
+<!-- Controls how the block gets placed in the world and limits the rotations in some cases. Possible values for this are:
+- TowardsPlacerInverted		
+- TowardsPlacer
+- TowardsPlacer90
+- Door					Limited to 4 cardinal rotations
+- Spotlight				Limited to 4 cardinal rotations, placing as spotlight
+- Torch					Limited to 4 cardinal rotations, placing as torch
+- DrawBridge			Limited to 4 cardinal rotations
+-->
+
+<property name="HandleFace" value="Bottom"/>
+<!-- This is ued to determine rotation orientation and axis. The following values can be specified: Top, Bottom, North, South, East, West -->
+
+<property name="OnlySimpleRotations" value="false"/>
+<!-- If this is set to true, the block can only be rotated around the axis specified by HandleFace. If set to false, or left out, the block can use all available rotations. -->
+
+<property name="AllowedRotations" value="All"/>
+<!-- 
+If this is set, you can limit the rotations or add extra rotations to your object. Possible values are:
+- All			Default, will allow all rotation angles
+- Basic90		Can rotate in 90 degree increments
+- Basic90And45	Can rotate in 45 degree increments
+-->
+
+<property name="SelectAlternates" value="false"/>
+<!-- If set to true, you will be able to use the PlaceAltBlockValue property to allow this block to bring up a list of others to place. This is what the bedroll and furniture helper blocks use to place different colours and variants. -->
+
+<property name="PlaceAltBlockValue" value=""/>
+<!-- A comma-separated list of block names that this block can use as alternate ones and will show up in the UI menu. In order to use this property you need to make sure the SelectAlternates property is defined and set to true. -->
+
+<property name="FuelValue" value="0"/>
+<!-- If this item has a fuel value, it means it can be used as fuel in a campfire, forge, or other workstation. The number given shows the burn time in seconds that this gives. -->
+
+<property name="MeltTimePerUnit" value="0.0"/>
+<!-- Time in seconds for how long this item needs to melt into a forge or workstation that uses the same mechanic. -->
+
+<property name="Weight" value="0" />
+<!-- Determines how much units of the base item you get when you put it in a forge or scrap the item. Base item is determined by the material. -->
+
+<property name="NoScrapping" value="true"/>
+<!-- If set to true, this item cannot be scrapped. -->
+
+<property name="CraftingIngredientTime" value=".0"/>
+<!-- If this item is used as a crafting ingredient, this is the amount of time in seconds that it adds to the recipe time. If a recipe specifies a craft_time that uses this item as an ingredient, this property is ignored. -->
+
+<property name="DowngradeBlock" value=""/>
+<!-- If the block hits 0HP, it will turn into this block. Name of the block as defined in blocks.xml -->
+
+<property name="PassThroughDamage" value="false"/>
+<!-- After a block downgrades, determines whether the remaining damage of the attacking source gets transferred to the new block. For example, if a block had 50HP left and a zombie did 80 damage, if PassThroughDamage is set to true, the downgraded block would receive the 30HP damage difference after the downgrade (80 damage - 50 remaining HP = 30 dealt). -->
+
+<property name="HarvestOverdamage" value="false"/>
+<!-- If set to true, doing a hit that would destroy the block also gives you more resources the larger the difference between the actual negaive HP value and 0HP was. Example if a block had 50HP and player did 51 damage they would receive some resources as the difference (-1) is close to 0HP. If the player did 150 damage, the player would receive even more resources since the difference (-100) is much further from 0HP. Resources given are based on the proportion of overdamage relative to the block's maximum HP, so if a block had 100 max HP and you did 200 damage, you'd receive double resources. -->
+
+<property name="Stacknumber" value="0"/> 
+<!-- How many items you can stack in one inventory slot. Does not work with items that use quality, since each one has individual stats. -->
+
+<property name="EconomicValue" value="0"/>
+<!-- How much this item is worth at the trader. Affected by trader_buy_markup and trader_sell_markdown in traders.xml as well as perks to give the final price of the item when you buy or sell it. -->
+
+<property name="EconomicBundleSize" value="1"/>
+<!-- If this property is specified with a value higher than 1, it means that this number of items is worth the EconomicValue and items can only be bought and sold in stacks of this amount. For example this is used when wood can only be sold in stacks of 100. -->
+
+<property name="SellableToTrader" value="true" />
+<!-- Whether you can sell this item to a trader. Does not affect whether the trader sells the item to you, and you can still specify an EconomicValue so the trader can still sell you an item -->
+
+<property name="TraderStageTemplate" value=""/>
+<!-- Where this item shows up in trader lists. -->
+
+<property name="CanPickup" value="false" param1="" />
+<!-- If set to true, the player can just pick this block up and add it to their inventory directly. If an item should be added instead (i.e. picking up a wood pile but getting the wood item) specify the item name in param1 as defined in items.xml. -->
+
+<property name="Candrop" value="true"/>
+<!-- If set to false the player cannot drop the item -->
+
+<property name="PickupJournalEntry" value=""/>
+<!-- When this item is picked up, a journal entry is added. The value specifies the journal entry key. -->
+
+<property name="Group" value=""/>
+<!-- A comma-separated list of group names. This is mainly used by the ui_display when the item is getting crafted on workstations so that the item is listed under certain categories of that workstation. -->
+
+<property name="SortOrder1" value="0000"/>
+<property name="SortOrder2" value="0000"/>
+<!-- These two properties determine where the block shows up in creative mode. -->
+
+<property name="BlockTag" value="None" />
+<!-- 
+The block tag is used to determine special properties of the block in the code with how AI reacts to it, or how it interacts with collisions etc. The possible values are:
+- None
+	No special behaviour.
+- GrowablePlant
+	No special behaviour in code, but all crops are marked with this. Probably will be used in the future for other behaviour.
+- Door
+	Used for doors which determines zombie behaviour when breaking them and looking through them, and does have some effect on the AI target tasks and counts as a non-blocking block in the AI pathfinding (they see it as open space). Also seems to have a weird interation with vending machine blocks if next to a block marked with this tag. Used in POI statistics and will count it as a 'door' in the statistics.
+- ClosetDoor
+	Used for the trap doors found in POIs where zombies break out from. Used for AI targeting tasks and counts as a non-blocking block in the AI pathfinding (they see it as open space).
+- Spike
+	This is used to create the interation with the entity's 'StompSpikes' mechnaic. If a block is marked as Spike and the entity has the StompSpikes, it will deal much more damage to this block when colliding with it.
+- TreeTrunk
+	No special behaviour in code, but all trees are marked with this. Probably will be used in the future for other behaviour.
+- Window
+	If used, seems to allow door blocks to be placed, and disables activation text if looked at. Also if used as a shape returns 0 for GetStepHeight() so probably used for sight collision. Used for AI targeting when searching for doors as well. Used in POI statistics and will count it as a 'window' in statistics.
+-->
+
+<property name="FilterTags" value=""/>
+<!-- 
+A comma-separated list of tags to filter the block in the creative menu. Included ones are:
+A21_NEW MC_building MC_helpers MC_outdoor MC_playerBlocks MC_Shapes SC_automotive SC_commercial SC_construction SC_crops SC_decor SC_destruction SC_doors SC_electrical SC_fences SC_helperCommercial SC_helperElectrical SC_helperIndustrial SC_helperOutdoor SC_helperResidential SC_helperSleeper SC_helpersTerrain SC_industrial SC_lighting SC_loot SC_playerHelpers SC_plumbing SC_questblocks SC_residential SC_shrubbery SC_signs SC_terrain SC_traps SC_treasureRoom SC_trees SC_windows 
+-->
+
+
+
+OPTIONAL PROPERTY CLASSES
+Some blocks can specify additional property classes with extra data. These are all optional and can be applied to any block.
+
+
+** RepairItems **
+<!-- This class determines how the block is repaired and what materials are required to repair the block. -->
+<property class="RepairItems">
+	<!-- Each property inside this class determines the name of the item (name attribute) and the amount of that item needed to repair (value attribute). There must be one or more properties, and you can add as many as needed for each item you want to use to repair. -->
+	<property name="" value=""/>
+	<!-- !! IMPORTANT !! Make sure the items in question specify a RepairAmount else a nullref will be thrown when trying to repair or placing the block!
+</property>
+
+
+** UpgradeBlock **
+<!-- This class determines what block the current block upgrades to when using a repair tool on it like a stone axe, hammer or nailgun. -->
+<property class="UpgradeBlock">
+	<property name="ToBlock" value=""/>
+	<!-- Specifies the name of the block that this one upgrades to. -->
+	<property name="Item" value=""/>
+	<!-- This is the upgrade item needed to upgrade the block as defined in items.xml. !! IMPORTANT !! If you have added your own custom item, make sure you also add it to the allowed_upgrade_items on each of the tools. -->
+	<property name="ItemCount" value="1" />
+	<!-- How many of the upgrade item is needed to fully upgrade the block -->
+	<property name="UpgradeHitCount" value="1" />
+	<!-- By default, this is how many hits the repair tool needs to do in order to complete the upgrade, which is altered with the Upgrade_hit_offset of the item. -->
+</property>
+
+
+
+BLOCK CLASSES AND ADDITIONAL PROPERTIES
+Some blocks can have additional classes that have a few extra properties that you can specify to determine the behaviour of the block. Below is a list of all the relevant classes, what they are used for, and additional properties that you can / should use with them.
+<property name="Class" value="BlockClass you want to use" />
+
+
+** Activate **
+<!-- When using this block it activates things in POIs or chanegs to a different block. Used for switches that are not tied to the power system. -->
+<property name="Class" value="Activate"/>
+
+Additional Properties: 
+	<property name="ActivateSound" value=""/>
+	<!-- The sound used when the block is activated. -->
+	<property name="BlockChangeTo" value=""/>
+	<!-- Changes the block to another one after activating it. -->
+
+
+** ActivateSingle **
+<!-- Used as an activate that affects things in POIs like fire going out or doors being unlocked. Also controls animation triggers on the character that activated the block. -->
+<property name="Class" value="ActivateSingle"/>
+
+Additional Properties:
+	<property name="ActivatedAnimBool" value="SwitchActivated" />
+	<!-- When the block is activated, this tells the animator to set a value on the character that activated it. -->
+    <property name="ActivatedAnimTrigger" value="SwitchTrigger" />
+	<!-- When the block is activated, this tells the animator to set a trigger on the character that activated it. -->
+    <property name="ActivatedAnimState" value="SwitchOnStatic" />
+	<!-- Determines the animator state on the character who activated the block. -->
+	<property name="ActivateSound" value=""/>
+	<!-- Plays this sound when the block is activated, as defined in sounds.xml. -->
+	<property name="SingleUse" value="false"/>
+	<!-- If single use, the block can only be activated one time. -->
+	
+	
+** ActivateSwitch **
+<!-- Used for switches to turn on lights and power in POIs. Does not have any special animation properties. Use ActivateSingle instead if this is needed. Seems redundant. --> 
+<property name="Class" value="ActivateSwitch"/>
+
+Additional Properties:
+	<property name="ActivateSound" value=""/>
+	<!-- When the block is activated, this sound is played. -->
+	<property name="Powered" value="false"/>
+	<!-- Whether the block is powered when activated. -->
+	<property name="SingleUse" value="false"/>
+	<!-- If set to true, the block can only be activated once -->
+	
+
+** Backpack **
+<!-- Marks the item as a lootable backpack and seems to not let you interact with it if it is underwater. Probably best not to use this and use Loot instead, as the dropped backpack from the player is now an entity and this is not even used in the blocks file itself anymore. -->
+<property name="Class" value="Backpack" />
+
+Additional Properties:
+	<property name="LootList" value="" />
+	<!-- Required property that determines which loot list is used when the block is used, as defined in loot.xml -->
+	<property name="AlternateLootList" value="" />
+	<!-- A comma-separated list of lootcontainer names as defined in loot.xml that this block could use as alternative loot lists. Does not seem to be defined in any block entry in the XML, so probably has weird behaviour or simply redundant. -->
+	<property name="LootStageMod" value="0.0"/>
+	<!-- If included, the character who loots this block will have their loot state modified by this percentage value. Can use to make tough blocks or blocks that spawn things to protect it give better loot. -->
+	<property name="LootStageBonus" value="0"/>
+	<!-- A flat value that is added to the character who loots the block after the LootStageMod is applied. -->
+	
+
+** Barbed **
+<!-- An unused block class that was formerly used by barbed wire. Use the Damage or TrunkTip class for damage over time. -->
+<property name="Class" value="Barbed" />	
+
+Additional Properties:
+	<property name="Damage" value="0" />
+	<!-- How much damage is done to the entity that collides with or walks on this block. -->
+	<property name="Damage_received" value="0" />
+	<!-- How much damage is taken by the block after damaging an entity that collides with or steps on it. -->
+	<property name="DamageType" value="" />
+	<!--
+	The type of damage done by this block. Used by entityclasses for immunities, eg if it does disease damage zombies won't feel it because they are immune to it.
+	Possible damage types are: None Piercing Slashing Bashing Crushing Corrosive Heat Cold Radiation Toxic Electrical Disease Infection Starvation Dehydration Falling Suffocation BloodLoss Sprain Break Stun Concuss KnockOut BlackOut KnockDown BarbedWire Suicide VehicleInside
+	-->
+
+
+** BatteryBank **
+<!-- Used for blocks that give out power from batteries or other such things that can be specified. -->
+<property name="Class" value="BatteryBank"/>
+
+Additional Properties:
+	<property name="SlotItem" value=""/>
+	<!-- The name of the item that fits into the UI slots. Takes the battery by default if this is not specified but you can add your own. -->
+	<property name="InputPerTick" value="1"/>
+	<!-- How much input the battery bank receives from other power sources per game tick. -->
+	<property name="ChargePerInput" value="1"/>
+	<!-- How many points of durability get restored to the battery per input received. -->
+	<property name="MaxPower" value="0"/>
+	<!-- The maximum power output the block can deliver. -->
+	<property name="OutputPerCharge" value="90"/>
+	<!-- How much power output each charge of the slot item gives. -->
+	<property name="OutputPerStack" value="50"/>
+	<!-- How much power each item gives when the block is active. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+	
+
+** BladeTrap **
+<!-- Used for the blade traps that deal damage with rotating blades. -->
+<property name="Class" value="BladeTrap"/>
+	
+Additional Properties:
+	<property name="RequiredPower" value="0"/>
+	<!-- How much power the block requires to run. -->
+	<property name="Damage" value="0"/>
+	<!-- How much damage is done when an entity walks on or into this block. -->
+	<property name="DamageReceived" value="4"/>
+	<!-- How much damage is received by the block after damaging an entity. -->
+	<property name="BreakingPercentage" value="0.5"/>
+	<!-- After the block HP reaches this percentage, the block will enter a damaged state. -->
+	<property name="BrokenPercentage" value="0.25"/>
+	<!-- After the block HP reaches this percentage, the block will enter a broken state. -->
+	<property name="ImpactSound" value=""/>
+	<!-- The sound that is made when an entity walks on or into this block. -->
+	<property name="StartSound" value=""/>
+	<!-- The sound made when the block is powered on. -->
+	<property name="StopSound" value=""/>
+	<!-- The sound made when the block is powered off. -->
+	<property name="RunningSound" value=""/>
+	<!-- The sound made while the block is on and receiving power. -->
+	<property name="RunningSoundBreaking" value=""/>
+	<!-- The sound made while the block is on and receiving power whilst in the damaged state. -->
+	<property name="RunningSoundBroken" value=""/>
+	<!-- The sound made while the block is on and receiving power whilst in the broken state. -->
+
+
+** Cactus **
+<!-- Used for cacti due to collisions, but essentially operates exactly the same as the Damage class. Overrides the 'IsTerrainDecoration' property to true and 'CanDecorateOnSlopes' to false. Seems redundant but still used by the cacti in the vanilla files. -->
+<property name="Class" value="Cactus" />	
+
+Additional Properties:
+	<property name="Damage" value="0" />
+	<!-- How much damage is done to the entity that collides with or walks on this block. -->
+	<property name="Damage_received" value="0" />
+	<!-- How much damage is taken by the block after damaging an entity that collides with or steps on it. -->
+	<property name="DamageType" value="" />
+	<!--
+	The type of damage done by this block. Used by entityclasses for immunities, eg if it does disease damage zombies won't feel it because they are immune to it.
+	Possible damage types are: None Piercing Slashing Bashing Crushing Corrosive Heat Cold Radiation Toxic Electrical Disease Infection Starvation Dehydration Falling Suffocation BloodLoss Sprain Break Stun Concuss KnockOut BlackOut KnockDown BarbedWire Suicide VehicleInside
+	-->
+
+
+** Campfire **
+<!-- Essentially this is the exact same as the Workstation class, however it uses a fixed localization key when looking at it. Probbaly redundant and you should use the Workstation class instead as it offers the same functionality. -->
+<property name="Class" value="Campfire"/> 
+
+Additional Properties:
+	<property name="OpenSound" value=""/>
+	<!-- The sound played when the workstation UI is opened. -->
+	<property name="CloseSound" value=""/>
+	<!-- The sound played when the workstation UI is closed. -->
+	<property name="CraftSound" value=""/>
+	<!-- The sound played when a crafting operation is started. -->
+	<property name="CraftCompleteSound" value=""/>
+	<!-- The sound played when an item craft operation is finished. -->
+	<property name="ParticleName" value=""/>
+	<!-- Optional particle effect that plays when turned on. -->
+	<property name="ParticleOffset" value="0,0,0"/>
+	<!-- Three numbers dictating the X,Y,Z offset of the particle effects -->
+	<property name="WorkstationIcon" value=""/>
+	<!-- The icon that is displayed next to recipes that need this workstation to craft. --> 
+	<property name="WorkstationJournalTip" value=""/>
+	<!-- The journal tip that pops up when using the workstation for the first time. -->
+	<property name="CraftIcon" value=""/>
+	<!-- The icon used next to the 'Craft' button on the workstation's UI. -->
+	<property name="CraftActionName" value=""/>
+	<!-- Localization key for text that should appear on the 'Craft' button on the workstation's UI. -->
+	<property name="HeatMapStrength" value="0"/>
+	<!-- The amount of heat the workstation gives out per interval. -->
+	<property name="HeatMapTime" value="1"/>
+	<!-- How long the heat lasts for before disappearing. -->
+	<property name="HeatMapFrequency" value="1"/>
+	<!-- How long between each heat map generation. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+Additional Property Classes:
+	<!-- Workstation -->
+	<!-- A required property class for all workstations that determine their UI properties. -->
+	<property class="Workstation">
+		<property name="CraftingAreaRecipes" value=""/>
+		<!-- Used to match up craft_area properties of recipes.xml to this workstation. The Campfire class auto-defaults to 'campfire' -->
+		<property name="Modules" value="tools,output,fuel,input"/>
+		<!-- 
+		Comma-separated list of modules that the workstation uses. 
+		Possible values are: 
+		- input				The input window for ingredients.
+		- output 			The output window where crafted items end up.
+		- material_input 	For forges, where materials go in to get melted.
+		- fuel 				The fuel slots for the workstation.
+		- tools 			The craft tool slots for the workstation.
+		-->
+		<property name="Collide" value=""/>
+		<!-- For whatever reason this also specifies colliders for the workstation. Possible that it is used to detect colliders to throw players out of the UI if a collision is detected. Possible values are sight melee bullet arrow rocket movement -->
+		<property name="WorkstationName" value=""/>
+		<!-- An optional property that changes the name of the workstation independently of the block name. By default, it is just the block name. Only use if you also specify WorkstationWindow and are prepared for breakages, as it's not even used in the vanilla XML code. -->
+		<property nanme="WorkstationWindow" value=""/>
+		<!-- An optional property that points to the name of the workstation's UI window, as defined in XUi/xui.xml. By default the window name for a workstation with block name 'myStation' is 'workstation_myStation' but you can override with this property. -->
+	</property>
+
+
+** CarExplode **
+<!-- Used for cars that are not lootable and explode when destroyed by something that is not a mining or disassembling tool. Car chassis and non-lootable barrels use this. -->
+<property name="Class" value="CarExplode"/>
+
+Additional Property Classes:
+	<!-- Explosion -->
+	<!-- Used to contain all explosive properties of the block. Not sure why these use a dedicated class and other blocks that satisfy explosions do not, but this is the norm for these types of blocks. -->
+	<property class="Explosion">
+		<property name="ParticleIndex" value="0"/>
+		<!-- The particle index of the explosion when the block is destroyed to trigger it. -->
+		<property name="RadiusBlocks" value="1"/>
+		<!-- How far the explosion damages blocks in a radius around it. -->
+		<property name="BlockDamage" value="1"/>
+		<!-- How much damage is done to the blocks inside the RadiusBlocks, with the actual value being applied at the epicentre and falling off as the blocks are further from the point. -->
+		<property name="RadiusEntities" value="1"/>
+		<!-- How far the explosion damages entities in a radius around it. -->
+		<property name="EntityDamage" value="1"/>
+		<!-- How much damage is done to the entities inside the RadiusEntities, with the actual value being applied at the epicentre and falling off as the entities are further from the point. -->
+	</property>
+
+
+** CarExplodeLoot **
+<!-- A combination of 'CarExplode' and 'Loot' blocks, combining all their properties together. Used for lootable cars and barrels that explode if destroyed by a damage source that isn't a mining or disassembling tool. -->
+<property name="Class" value="CarExplodeLoot"/>
+
+Additional Properties:
+	<property name="LootList" value="" />
+	<!-- Required property that determines which loot list is used when the block is used, as defined in loot.xml -->
+	<property name="AlternateLootList" value="" />
+	<!-- A comma-separated list of lootcontainer names as defined in loot.xml that this block could use as alternative loot lists. Does not seem to be defined in any block entry in the XML, so probably has weird behaviour or simply redundant. -->
+	<property name="LootStageMod" value="0.0"/>
+	<!-- If included, the character who loots this block will have their loot state modified by this percentage value. Can use to make tough blocks or blocks that spawn things to protect it give better loot. -->
+	<property name="LootStageBonus" value="0"/>
+	<!-- A flat value that is added to the character who loots the block after the LootStageMod is applied. -->
+
+Additional Property Classes:
+	<!-- Explosion -->
+	<!-- Used to contain all explosive properties of the block. Not sure why these use a dedicated class and other blocks that satisfy explosions do not, but this is the norm for these types of blocks. -->
+	<property class="Explosion">
+		<property name="ParticleIndex" value="0"/>
+		<!-- The particle index of the explosion when the block is destroyed to trigger it. -->
+		<property name="RadiusBlocks" value="1"/>
+		<!-- How far the explosion damages blocks in a radius around it. -->
+		<property name="BlockDamage" value="1"/>
+		<!-- How much damage is done to the blocks inside the RadiusBlocks, with the actual value being applied at the epicentre and falling off as the blocks are further from the point. -->
+		<property name="RadiusEntities" value="1"/>
+		<!-- How far the explosion damages entities in a radius around it. -->
+		<property name="EntityDamage" value="1"/>
+		<!-- How much damage is done to the entities inside the RadiusEntities, with the actual value being applied at the epicentre and falling off as the entities are further from the point. -->
+	</property>
+
+
+** CropsGrown **
+<!-- 
+For crops that, when grown, can be harvested and picked up by the player. Currently only used for mushrooms but still works with old crops if you change it. 
+
+!! IMPORTANT !! When harvesting, the very first <drop event="Harvest"/> is used to determine what item you get. No other drop events are considered unless you break the block, meaning if you have several Harvest events they won't be counted.
+-->
+<property name="Class" value="CropsGrown"/>
+
+Additional Properties:
+	<property name="BlockBeforeHarvesting" value=""/>
+	<!-- When the block is picked, it will revert back to this one. Can leave this property out if you want to set it back to air. -->
+	<property name="PlantGrowing.FertileLevel" value="0"/>
+	<!-- The fertile level of the ground underneath the block to allow it to grow and stay in this form. The amount of crop harvest that you get depends on how much the fertile level of the ground exceeds the minimum fertile level specified here. -->
+	<property name="CropsGrown.BonusHarvestDivisor" value="1"/>
+	<!-- 
+	The crops you get will get divided by this number. To work out the number of crops you receive, the formula is:
+	Bonus Yield = current fertile level / BonusHarvestDivisor
+	So if a plant yields 5 crops at a fertile level of 1 and we grew our crop on a fertile ground of 3 and have a divisor of 3:
+	Bonus Yield = 3  / 3 = 1 -> We get 6 crops yield.
+	-->
+
+
+** Damage **
+<!-- Used to make the block deal damage to entities that collide with or step on the block. -->
+<property name="Class" value="Damage"/>	
+
+Additional Properties:
+	<property name="Damage" value="0"/>
+	<!-- How much damage is done to the entity that collides with or walks on this block. -->
+	<property name="Damage_received" value="0" />
+	<!-- How much damage is taken by the block after damaging an entity that collides with or steps on it. -->
+	<property name="DamageType" value="" />
+	<!--
+	The type of damage done by this block. Used by entityclasses for immunities, eg if it does disease damage zombies won't feel it because they are immune to it.
+	Possible damage types are: None Piercing Slashing Bashing Crushing Corrosive Heat Cold Radiation Toxic Electrical Disease Infection Starvation Dehydration Falling Suffocation BloodLoss Sprain Break Stun Concuss KnockOut BlackOut KnockDown BarbedWire Suicide VehicleInside
+	-->
+
+
+** DeadGrass **
+<!-- Used for grasses that specify multiple textures. This is to tell the block to randomly select a texture from the list provided rather than coat the face of the block with each texture. -->
+<property name="Class" value="Deadgrass"/>
+
+Additional Properties:
+	<!-- None -->
+
+
+** DewCollector **
+<!-- Makes a block that generates material over time in a UI window. -->
+<property name="Class" value="DewCollector"/>
+
+Additional Properties:
+	<property name="WorkstationIcon" value=""/>
+	<!-- The icon used to show the workstation craft on the UI. -->
+	<property name="OpenSound" value=""/>
+	<!-- The sound played when the UI is opened for this block. -->
+	<property name="CloseSound" value=""/>
+	<!-- The sound played when the UI is closed for this block. -->
+	<property name="ConvertSound" value=""/>
+	<!-- The sound made when a craft is finished. -->
+	<property name="MinConvertTime" value="21600" /> 
+	<!-- The minimum amount of in-game seconds that the block takes to convert an item. A setting of 3600 is 1 in-game hour. -->
+	<property name="MaxConvertTime" value="36000" /> 
+	<!-- The maximum amount of in-game seconds that the block takes to convert an item. A setting of 3600 is 1 in-game hour. -->
+	<property name="ConvertToItem" value="drinkJarBoiledWater" />
+	<!-- The output item given by the block. -->
+	<property name="HeatMapStrength" value="0"/>
+	<!-- The amount of heat the workstation gives out per interval. -->
+	<property name="HeatMapTime" value="1"/>
+	<!-- How long the heat lasts for before disappearing. -->
+	<property name="HeatMapFrequency" value="1"/>
+	<!-- How long between each heat map generation. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+
+** Door **
+<!-- Used for all non-locked doors. -->
+<property name="Class" value="Door"/>
+
+Additional Properties:
+	<property name="OpenSound" value=""/>
+	<!-- The sound that plays when the door is opened. -->
+	<property name="CloseSound" value=""/>
+	<!-- The sound that plays when the door is closed. -->
+	<property name="PlaceEverywhere" value="false" />
+	<!-- If this is set to true, the game will not expect a solid cube underneath the door allowing it to be placed on any type of block. -->
+	
+
+** DoorSecure **
+<!-- Used for all lockable and securable doors. -->
+<property name="Class" value="DoorSecure" />
+
+Additional Properties:
+	<property name="OpenSound" value=""/>
+	<!-- The sound that plays when the door is opened. -->
+	<property name="CloseSound" value=""/>
+	<!-- The sound that plays when the door is closed. -->
+	<property name="LockedSound" value=""/>
+	<!-- The sound that plays when the door is locked. -->
+	<property name="PlaceEverywhere" value="false" />
+	<!-- If this is set to true, the game will not expect a solid cube underneath the door allowing it to be placed on any type of block. -->
+
+
+** DrawBridge **
+<!-- Used for all drawbridge blocks apart from the powered one. Seems like it is a bit redundant as it inherits all the properties from DoorSecure, but it calculates whether it blocks paths etc a bit differently than doors. -->
+<property name="Class" value="DrawBridge" />
+
+Additional Properties:
+	<property name="OpenSound" value=""/>
+	<!-- The sound that plays when the door is opened. -->
+	<property name="CloseSound" value=""/>
+	<!-- The sound that plays when the door is closed. -->
+	<property name="LockedSound" value=""/>
+	<!-- The sound that plays when the door is locked. -->
+	<property name="PlaceEverywhere" value="false" />
+	<!-- If this is set to true, the game will not expect a solid cube underneath the door allowing it to be placed on any type of block. -->
+
+
+** ElectricWire **
+<!-- Used for relays that should shock targets when they collide with teh wire. -->
+<property name="Class" value="ElectricWire"/>
+	
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- How much power is required to activate this block and allow it to run. -->
+	<property name="DamageReceived" value="0"/>
+	<!-- The amount of damage received when an entity collides with this block or any wires that attach to it. -->
+	<property name="Buff" value=""/>
+	<!-- Buff or status effect applied to entities that collide with the block or wire. -->
+	<property name="BuffChance" value="1"/>
+	<!-- The chance that the buff gets applied. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+	
+	
+** Forge **
+<!-- Essentially this is the exact same as the Workstation class, however it uses a fixed localization key when looking at it. Also controls emission level of materials (how much light the texture gives off) when the block is activated or not. In most cases you should probably just use the Workstation class, as it does not allow for custom activating text unless you have materials that you want to control emissions on. -->
+<property name="Class" value="Forge"/> 
+
+Additional Properties:
+	<property name="OpenSound" value=""/>
+	<!-- The sound played when the workstation UI is opened. -->
+	<property name="CloseSound" value=""/>
+	<!-- The sound played when the workstation UI is closed. -->
+	<property name="CraftSound" value=""/>
+	<!-- The sound played when a crafting operation is started. -->
+	<property name="CraftCompleteSound" value=""/>
+	<!-- The sound played when an item craft operation is finished. -->
+	<property name="ParticleName" value=""/>
+	<!-- Optional particle effect that plays when turned on. -->
+	<property name="ParticleOffset" value="0,0,0"/>
+	<!-- Three numbers dictating the X,Y,Z offset of the particle effects -->
+	<property name="WorkstationIcon" value=""/>
+	<!-- The icon that is displayed next to recipes that need this workstation to craft. --> 
+	<property name="WorkstationJournalTip" value=""/>
+	<!-- The journal tip that pops up when using the workstation for the first time. -->
+	<property name="CraftIcon" value=""/>
+	<!-- The icon used next to the 'Craft' button on the workstation's UI. -->
+	<property name="CraftActionName" value=""/>
+	<!-- Localization key for text that should appear on the 'Craft' button on the workstation's UI. -->
+	<property name="HeatMapStrength" value="0"/>
+	<!-- The amount of heat the workstation gives out per interval. -->
+	<property name="HeatMapTime" value="1"/>
+	<!-- How long the heat lasts for before disappearing. -->
+	<property name="HeatMapFrequency" value="1"/>
+	<!-- How long between each heat map generation. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+Additional Property Classes:
+	<!-- Workstation -->
+	<!-- A required property class for all workstations that determine their UI properties. -->
+	<property class="Workstation">
+		<property name="CraftingAreaRecipes" value=""/>
+		<!-- Used to match up craft_area properties of recipes.xml to this workstation. The Forge class auto-defaults to 'forge' -->
+		<property name="Modules" value="tools,output,fuel,input"/>
+		<!-- 
+		Comma-separated list of modules that the workstation uses. 
+		Possible values are: 
+		- input				The input window for ingredients.
+		- output 			The output window where crafted items end up.
+		- material_input 	For forges, where materials go in to get melted.
+		- fuel 				The fuel slots for the workstation.
+		- tools 			The craft tool slots for the workstation.
+		-->
+		<property name="Collide" value=""/>
+		<!-- For whatever reason this also specifies colliders for the workstation. Possible that it is used to detect colliders to throw players out of the UI if a collision is detected. Possible values are sight melee bullet arrow rocket movement -->
+		<property name="WorkstationName" value=""/>
+		<!-- An optional property that changes the name of the workstation independently of the block name. By default, it is just the block name. Only use if you also specify WorkstationWindow and are prepared for breakages, as it's not even used in the vanilla XML code. -->
+		<property nanme="WorkstationWindow" value=""/>
+		<!-- An optional property that points to the name of the workstation's UI window, as defined in XUi/xui.xml. By default the window name for a workstation with block name 'myStation' is 'workstation_myStation' but you can override with this property. -->
+	</property>
+
+
+** GameEvent **
+<!-- A block that can be used to trigger a game event when activated, collided with, damaged, or destroyed. -->
+<property name="Class" value="GameEvent"/>
+
+Additional Properties:
+    <property name="ActivateEvent" value=""/>
+	<!-- The name of the game event that plays when the block is activated. -->
+	<property name="DamageEvent" value=""/>
+	<!-- The name of the game event that plays when the block is damaged. -->
+	<property name="TriggeredEvent" value=""/>
+	<!-- The name of the game event that plays when the block is triggered. -->
+	<property name="AddedEvent" value=""/>
+	<!-- The name of the game event that plays when the block is placed or added to the world. -->
+	<property name="DestroyOnEvent" value="false"/>
+	<!-- If set to true, the block will destroy itself once the event triggers. -->
+
+
+** Generator **
+<!-- Used for blocks that generate power from a fuel source. -->
+<property name="Class" value="Generator"/>
+
+Additional Properties:
+	<property name="SlotItem" value=""/>
+	<!-- The name of the item that needs to be placed in a slot to make the generator work. -->
+	<property name="MaxFuel" value="1"/>
+	<!-- How much fuel the generator can store at maximum. -->
+	<property name="MaxPower" value="1"/>
+	<!-- The maximum power output of the generator. -->
+	<property name="OutputPerFuel" value="1"/>
+	<!-- How much power one unit of fuel will output. -->
+	<property name="OutputPerStack" value="1"/>
+	<!-- How much power is output from each item in the slots of the generator. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+	
+	
+** Gore **
+<!-- A long-deprecated block class that used to be used for zombie corpses when they would decay into bloody gore piles. Still seems functional, however. After a set amount of time, the block disappears from the world. -->
+<property name="Class" value="Gore"/>
+
+Additional Properties:
+	<property name="GoreTime" value="1" />
+	<!-- The time in minutes for the block to last for, after which time it will disappear. -->
+
+
+** Hay **
+<!-- Used for blocks that negate most fall damage when landed on. -->
+<property name="Class" value="Hay" />
+
+Additional Properties:
+	<!-- None -->
+	
+	
+** Hazard **
+<!-- A block that gives off buffs in an area or triggers damage when you are in the area. Used for POI hazards like the fire traps. You don't just have to use this for hazards, though... -->
+<property name="Class" value="Hazard" />
+
+Additional Properties:
+	<property name="ParticleName" value="" />
+	<!-- The particle effect given off by the block whilst it is active. -->
+	<property name="ParticleOffset" value="0,0,0"/>
+	<!-- Three comma-separated numbers that give the XYZ offset of the particle effect. -->
+	<property name="DamageBuffs" value="" />
+	<!-- A comma-separated list of buff names that are used when the player is getting damaged. -->
+	<property name="DamageOffset" value="0,0,0" />
+	<!-- Three comma-separated numbers that give the XYZ offset of the region where the damage buffs apply. -->
+	<property name="DamageSize" value="1,1,1" />
+	<!-- Three comma-separated numbers that determine the size of the damage area. -->
+	<property name="SecondaryBuffs" value="" />
+	<!-- A comma-separated list of buff names that are used when the player is getting dmaged in the secondary area. -->
+	<property name="SecondaryOffset" value="0,0,0" />
+	<!-- Three comma-separated numbers that give the XYZ offset of the region where the secondary buffs apply. -->
+	<property name="SecondarySize" value="1,1,1" />
+	<!-- Three comma-separated numbers that determine the size of the secondary buff area. -->
+	<property name="StartSound" value="" />
+	<!-- The sound that plays when the hazard is activated. -->
+	<property name="StopSound" value="" />
+	<!-- The sound that plays when the hazard is stopped. -->
+
+
+** JumpPad **
+<!-- A block that will make players jump 3m high when walking on it. -->
+<property name="Class" value="JumpPad"/>
+
+Additional Properties:
+	<!-- None -->
+	
+	
+** Ladder **
+<!-- Acts as a ladder, allowing entities that have CanUseLadders set to true to climb up them veritically. -->
+<property name="Class" value="Ladder"/>
+
+Additional Properties:
+	<!-- None -->
+	
+	
+** LandClaim **
+<!-- Used for players to mark off an area of safe land, creating a safe-zone where no enemies can spawn nor can harmful Twitch actions be used (unless no-safe is applied) -->
+<property name="Class" value="LandClaim"/>
+
+Additional Properties:
+	<!-- None -->
+	
+
+** Launcher **
+<!-- A powered block that launches ammunition out of it when activated. -->
+<property name="Class" value="Launcher"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- How much power this block requires in order to start firing ammunition. -->
+	<property name="StartSound" value=""/>
+	<!-- The sound that plays when the block activates. -->
+	<property name="PlaySound" value=""/>
+	<!-- The sound that loops whilst the block is continually active. -->
+	<property name="EndSound" value=""/>
+	<!-- The sound that plays when the block deactivates or runs out of power. -->
+	<property name="BurstFireRate" value="1.0"/>
+	<!-- The time in seconds between rounds fired. -->
+	<property name="ShowTargeting" value="false"/>
+	<!-- Whether the target is shown as a laser point. -->
+	<property name="AmmoItem" value=""/>
+	<!-- The name of the item used as ammunition for the block. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+
+** Light **
+<!-- A block that gives out light regardless of whether it is powered or not. -->
+<property name="Class" value="Light"/>
+
+Additional Properties:
+	<property name="Light" value="1.0"/>
+	<!-- A number between 0 and 1 that determines the light level given out by the block. -->
+	<property name="RuntimeSwitch" value="false"/>
+	<!-- If set to true, the player will be able to interact with the block to turn the light on or off. -->
+
+
+** LiquidSource **
+<!-- A very primitive class used for water blocks in older alphas. Probably best left avoided. -->
+<property name="Class" value="LiquidSource" />
+
+Additional Properties:
+	<!-- None -->
+	
+
+** Liquidv2 **
+<!-- Used for blocks of liquid that calculate flow (somewhat...) -->
+<property name="Class" value="Liquidv2" />
+
+Additional Properties:
+	<property name="Count" value="0" />
+	<!-- When the liquid is placed in the world, determines how many additional blocks of liquid can be placed around it. -->
+
+
+** Loot **
+<!-- Marks the block as a lootable container that will give out a random assortment of loot when interacted with by the player. -->
+<property name="Class" value="Loot" />
+
+Additional Properties:
+	<property name="LootList" value="" />
+	<!-- Required property that determines which loot list is used when the block is used, as defined in loot.xml -->
+	<property name="AlternateLootList" value="" />
+	<!-- A comma-separated list of lootcontainer names as defined in loot.xml that this block could use as alternative loot lists. Does not seem to be defined in any block entry in the XML, so probably has weird behaviour or simply redundant. -->
+	<property name="LootStageMod" value="0.0"/>
+	<!-- If included, the character who loots this block will have their loot state modified by this percentage value. Can use to make tough blocks or blocks that spawn things to protect it give better loot. -->
+	<property name="LootStageBonus" value="0"/>
+	<!-- A flat value that is added to the character who loots the block after the LootStageMod is applied. -->
+
+
+** Mine **
+<!-- Makes the block act like a land mine, detonating when stepped on after a configurable delay. -->
+<property name="Class" value="Mine"/>
+
+Additional Properties:
+	<property name="TriggerDelay" value="0.0"/>
+	<!-- The time in seconds from stepping on the mine to when it actually explodes. -->
+	<property name="TriggerSound" value=""/>
+	<!-- The sound played when the mine is stepped on and active. -->
+	<property name="NoImmunity" value="false" />
+	<!-- If set to true, the immunity from landmines from perks and buffs is ignored, Used for troll twitch events. -->
+	<property name="Explosion.ParticleIndex" value="0"/>
+	<!-- The explosion that triggers when the mine detonates. -->
+	<property name="Explosion.RadiusBlocks" value="1"/>
+	<!-- How far the explosion damages blocks in a radius around it. -->
+	<property name="Explosion.BlockDamage" value="1"/>
+	<!-- How much damage is done to the blocks inside the RadiusBlocks, with the actual value being applied at the epicentre and falling off as the blocks are further from the point. -->
+	<property name="Explosion.RadiusEntities" value="1"/>
+	<!-- How far the explosion damages entities in a radius around it. -->
+	<property name="Explosion.EntityDamage" value="1"/>
+	<!-- How much damage is done to the entities inside the RadiusEntities, with the actual value being applied at the epicentre and falling off as the entiteis are further from the point. -->
+	<property name="Explosion.DamageBonus.{material}" value="1.0"/>
+	<!-- When damaging blocks and entities, you can specify a material like stone or wood to determine if the explosion does more or less damage to that type of material. A flat multiplier. Setting to 0 will disable the explosion dmaaging that material, setting to 1 does default damage, and setting to higher than 1 makes it do more damage. -->
+	
+
+** ModelTree **
+<!-- Used for all trees and gives them the 'fall over' behaviour (although this can also be disabled). Also will prevent players and mobs from spawning on it, as well as marking it as a terrain decoration and decoratable on slopes even if you define these properties separately. Extends the PlantGrowing block class, so if you do not want your block to act like a tree, use PlantGrowing instead. -->
+<property name="Class" value="ModelTree"/>
+
+Additional Properties:
+	<property name="FallOver" value="true"/>
+	<!-- If set to false, the block will not fall over when destroyed and just disappear instead. -->
+	<property name="UpwardsCount" value="0"/>
+	<!-- This property is deprecated. Use the Y value of MultiBlockDim to specify this instead. -->
+	<property name="PlantGrowing.Next" value=""/>
+	<!-- If this is defined, the block will turn into this one after the GrowthRate is defined. -->
+	<property name="PlantGrowing.GrowthRate" value="1"/>
+	<!-- A value between 1 and 63 that determines the rate of growth. 1 is fastest. -->
+	<property name="PlantGrowing.IsRandom" value="false"/>
+	<!-- If set to true, the GrowthRate has a random extra time applied. -->
+	<property name="PlantGrowing.FertileLevel" value="1"/>
+	<!-- The fertile level of the block below this one needed for the plant to survive. -->
+	<property name="PlantGrowing.LightLevelGrow" value="0"/>
+	<!-- The amount of light for this block to grow. -->
+	<property name="PlantGrowing.LightLevelStay" value="0"/>
+	<!-- The amount of light for this block to stay. -->
+	<property name="PlantGrowing.IsGrowOnTopEnabled" value="false"/>
+	<!-- If set to true, this block will grow something on top of it as well. -->
+	<property name="PlantGrowing.GrowOnTop" value=""/>
+	<!-- The name of the block to grow on top of this one. -->
+	
+	
+** MotionSensor **
+<!-- Used as an entity-detector and will output power to other blocks in the circuit if any are found. -->
+<property name="Class" value="MotionSensor"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- How much power is needed for this block to work. -->
+	<property name="YawRange" value="1"/>
+	<!-- The maximum angle of the left-to-right rotation axis of the sensor. -->
+	<property name="PitchRange" value="1"/>
+	<!-- The maximum angle of the up-to-down rotation axis of the sensor. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+	
+	
+** Music **
+<!-- Does not seem to do anything. Probably a working concept that got scrapped in early alphas. -->
+<property name="Class" value="BlockMusic"/>
+
+Additional Properties:
+	<!-- None -->
+	
+
+** Particle **
+<!-- Used for blocks that should give off a particle effect continually. It is not used in the main blocks.xml but things like workstations extend from this block class for their particle effect when active. If you plan to use this on any block that will become part of world gneeration, it is probably not recommended to use this as every time the block is loaded it has to be paired with the particle effect, and therefore computationally inefficient compared to making a custom block with the particle effect you want already applied directly. But you could use this for small amounts of blocks. -->
+<property name="Class" value="Particle"/>
+
+Additional Properties:
+	<property name="ParticleName" value="" />
+	<!-- The particle effect given off by the block whilst it is active. -->
+	<property name="ParticleOffset" value="0,0,0"/>
+	<!-- Three comma-separated numbers that give the XYZ offset of the particle effect. -->
+	
+	
+** Plant **
+<!-- A very old block class that is no longer used and is in fact handled by the base block class. Marks the block as a plant which allows you to control what fertility level of the soil and light level is needed for the plant to be able to survive. Use the PlantGrowing or ModelTree classes instead. -->
+<property name="Class" value="Plant"/>
+
+Additional Properties:
+	<property name="FertileLevel" value="1"/>
+	<!-- The fertile level of the block beneath the plant in order for it to survive. -->
+	<property name="LightLevelStay" value="1"/>
+	<!-- The amount of light needed for the block to survive. -->
+	
+	
+** PlantGrowing **
+<!-- Used for controlling blocks growing into other blocks based on the amount of light and fertile level of the ground below it. -->
+<property name="Class" value="PlantGrowing"/>
+
+Additional Properties:
+	<property name="PlantGrowing.Next" value=""/>
+	<!-- If this is defined, the block will turn into this one after the GrowthRate is defined. -->
+	<property name="PlantGrowing.GrowthRate" value="1"/>
+	<!-- A value between 1 and 63 that determines the rate of growth. 1 is fastest. -->
+	<property name="PlantGrowing.IsRandom" value="false"/>
+	<!-- If set to true, the GrowthRate has a random extra time applied. -->
+	<property name="PlantGrowing.FertileLevel" value="1"/>
+	<!-- The fertile level of the block below this one needed for the plant to survive. -->
+	<property name="PlantGrowing.LightLevelGrow" value="0"/>
+	<!-- The amount of light for this block to grow. -->
+	<property name="PlantGrowing.LightLevelStay" value="0"/>
+	<!-- The amount of light for this block to stay. -->
+	<property name="PlantGrowing.IsGrowOnTopEnabled" value="false"/>
+	<!-- If set to true, this block will grow something on top of it as well. -->
+	<property name="PlantGrowing.GrowOnTop" value=""/>
+	<!-- The name of the block to grow on top of this one. -->
+	
+	
+	
+** PlayerSign **
+<!-- Used for signs that the player can place down and write on. -->
+<property name="Class" value="PlayerSign"/>
+
+Additional Properties:
+	<!-- None -->
+	
+
+** Powered **
+<!-- Used for blocks that need power but don't do anything with said power other than pass it on, such as relays. -->
+<property name="Class" value="Powered"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- The amount of power needed by this block. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+	
+
+** PoweredDoor **
+<!-- Used for any door block that also requires power to open and close it. -->
+<property name="Class" value="PoweredDoor"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- The amount of power needed by this block. -->
+	<property name="OpenSound" value=""/>
+	<!-- The sound that plays when the door is opened. -->
+	<property name="CloseSound" value=""/>
+	<!-- The sound that plays when the door is closed. -->
+	<property name="PlaceEverywhere" value="false" />
+	<!-- If this is set to true, the game will not expect a solid cube underneath the door allowing it to be placed on any type of block. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+	
+	
+** PoweredLight **
+<!-- Used for all lights that the player can hook up to power. -->
+<property name="Class" value="PoweredLight"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- The amount of power needed by this block. -->
+	<property name="RuntimeSwitch" value="false"/>
+	<!-- If set to true, the player will be able to interact with the block to turn the light on or off. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+	
+	
+** PoweredTrap **
+<!-- Used for blocks that should deal damage when powered, may not work though as it is not actually used by anything in the vanilla blocks.xml. -->
+<property name="Class" value="PoweredTrap"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- The amount of power needed by this block. -->
+	<property name="Damage" value="0" />
+	<!-- How much damage is done to the entity that collides with or walks on this block. -->
+	<property name="Damage_received" value="0" />
+	<!-- How much damage is taken by the block after damaging an entity that collides with or steps on it. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+
+** PowerSource **
+<!-- A subclass of the SolarPanel, Generator and BatteryBank block classes, but can still be used. Does not allow you to specify maximum output or fuel. If you need those features, use a different block class instead. -->
+<property name="Class" value="PowerSource"/>
+
+Additional Properties:
+	<property name="SlotItem" value=""/>
+	<!-- The name of the item that needs to be placed in a slot to make the generator work. -->
+	<property name="OutputPerStack" value="1"/>
+	<!-- How much power is output from each item in the slots of the generator. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+
+** PressurePlate **
+<!-- A block that will provide power to others down the chain when stepped on by an entity. -->
+<property name="Class" value="PressurePlate"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- How much power is needed for the block to operate. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+
+** QuestActivate **
+<!-- Used during quests that need you to activate a block for the next step. -->
+<property name="Class" value="QuestActivate"/>
+
+Additional Properties:
+	<property name="ValidQuestTags" value="" />
+	<!-- A comma-separated list of quest tags that this block can accept (so you can separate multiple blocks with quest tags in a POI that may need different quests. -->
+	<property name="ActivateTime" value="1" />
+	<!-- The time needed for the block to be activated. -->
+
+
+** QuestLoot **
+<!-- Used for treasure chests and stash containers on quests. Has the same properties as regular loot blocks, so if you are not using the block for quest items, use Loot instead. -->
+<property name="Class" value="QuestLoot"/>
+
+Additional Properties:
+	<property name="LootList" value="" />
+	<!-- Required property that determines which loot list is used when the block is used, as defined in loot.xml -->
+	<property name="AlternateLootList" value="" />
+	<!-- A comma-separated list of lootcontainer names as defined in loot.xml that this block could use as alternative loot lists. Does not seem to be defined in any block entry in the XML, so probably has weird behaviour or simply redundant. -->
+	<property name="LootStageMod" value="0.0"/>
+	<!-- If included, the character who loots this block will have their loot state modified by this percentage value. Can use to make tough blocks or blocks that spawn things to protect it give better loot. -->
+	<property name="LootStageBonus" value="0"/>
+	<!-- A flat value that is added to the character who loots the block after the LootStageMod is applied. -->
+	
+	
+
+** RallyMarker **
+<!-- Used for rally points to begin or continue phases of quests. -->
+<property name="Class" value="RallyMarker"/>
+
+Additional Properties:
+	<!-- None -->
+	
+	
+** Ranged **
+<!-- Used for electrical turrets that can turn and fire bullets. If you wish to make your own one, you MUST have an AutoTurretController on the item else most of these properties will not function at all. -->
+<property name="Class" value="Ranged"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- How much power is required by the block. -->
+	<property name="AmmoItem" value=""/>
+	<!-- The ammunition that can be loaded into this block. -->
+	<property name="TurnSpeed" value=""/>
+	<!-- How quickly the block can turn. -->
+	<property name="MaxDistance" value="1"/>
+	<!-- How far the block can shoot. -->
+	<property name="EntityDamage" value="1"/>
+	<!-- How much damage each round does to all entities. -->
+	<property name="BlockDamage" value="1"/>
+	<!-- How much damage each round does to all blocks. -->
+	<property name="RaySpread" value="1.0"/>
+	<!-- How far from the center point in degrees the shot will spread out. Use small values less than 2 for accuracy. Use higher values for inaccuracy. -->
+	<property name="BurstRoundCount" value=""/>
+	<!-- When in burst fire mode, how many rounds can be fired in a burst. -->
+	<property name="BurstFireRate" value="1.0"/>
+	<!-- Time in seconds between rounds. The lower the time, the quicker the turret will shoot. -->
+	<property name="CooldownTime" value="1"/>
+	<!-- After the bursts have fired, how long the turret will need to 'reload' for the next burst. -->
+	<property name="OvershootTime" value="1.0"/>
+	<!-- How long in seconds the turret continues to shoot for after it no longer detects entities. -->
+	<property name="WakeUpTime" value="1.0"/>
+	<!-- How long in seconds the turret takes to start shooting at entities after they are first detected. -->
+	<property name="FallAsleepTime" value="1.0"/>
+	<!-- How long in seconds the turret takes to deactivate after no entities are found, returning to an idle state. -->
+	<property name="YawRange" value="1"/>
+	<!-- The maximum angle of the left-to-right rotation axis of the turret. -->
+	<property name="PitchRange" value="1"/>
+	<!-- The maximum angle of the up-to-down rotation axis of the turret. -->
+	<property name="ParticlesMuzzleFire" value=""/>
+	<!-- The particle effect that plays when the block fires a round of ammo. -->
+	<property name="ParticlesMuzzleSmoke" value=""/>
+	<!-- The particle effect that plays after the block fires a round of ammo and the muzzle particle stops. -->
+	<property name="IdleSound" value=""/>
+	<!-- While powered, this is the sound the turret will play. -->
+	<property name="WakeUpSound" value=""/>
+	<!-- After detecting entities, the turret will play this sound. -->
+	<property name="TargetingSound" value=""/>
+	<!-- When targeting an entity, the turret will play this sound. -->
+	<property name="FireSound" value=""/>
+	<!-- Each round fired by the turret will play this sound. -->
+	<property name="OverheatSound" value=""/>
+	<!-- After the turret has fired all burst rounds, this sound will play. -->
+    <property name="IgnoreKeystoneOverlay" value="true"/>
+	<!-- If set to true, this can still fire even on a land claimed area. -->
+	<property name="DamageBonus.{material}" value="1"/>
+	<!-- If the turret does different amounts of damage to different materials, you can specify this property as many times as needed and substitute {material} for the name of the material. Applies a flat multiplier to the damage dealt to the material specified. -->
+	
+
+** SecureLoot **
+<!-- Used on loot containers that are locked, and have the ability to be lockpicked by the player. -->
+<property name="Class" value="LootSecure"/>
+
+Additional Properties:
+	<property name="LootList" value="" />
+	<!-- Required property that determines which loot list is used when the block is used, as defined in loot.xml -->
+	<property name="LootStageMod" value="0.0"/>
+	<!-- If included, the character who loots this block will have their loot state modified by this percentage value. Can use to make tough blocks or blocks that spawn things to protect it give better loot. -->
+	<property name="LootStageBonus" value="0"/>
+	<!-- A flat value that is added to the character who loots the block after the LootStageMod is applied. -->
+	<property name="LockPickItem" value=""/>
+	<!-- The name of the item that is consumed when picking the lock of this block. -->
+	<property name="LockPickTime" value="1"/>
+	<!-- Time in seconds for the player to pick the lock of this container. -->
+	<property name="LockPickBreakChance" value="0.0"/>
+	<!-- A value between 0 and 1 to determine how likely the lockpick item is to break. -->
+	<property name="LockPickSuccessEvent" value=""/>
+	<!-- If the lockpick attempt is successful, this GameEvent will be triggered. -->
+	<property name="LockPickFailedEvent" value=""/>
+	<!-- If the lockpick attempt fails, this GameEvent will be triggered. -->
+	
+	
+** SecureLootSigned **
+<!-- Used on loot containers that are lockable and can have signs written on them, and have the ability to be lockpicked by the player. -->
+<property name="Class" value="LootSecure"/>
+
+Additional Properties:
+	<property name="LootList" value="" />
+	<!-- Required property that determines which loot list is used when the block is used, as defined in loot.xml -->
+	<property name="LootStageMod" value="0.0"/>
+	<!-- If included, the character who loots this block will have their loot state modified by this percentage value. Can use to make tough blocks or blocks that spawn things to protect it give better loot. -->
+	<property name="LootStageBonus" value="0"/>
+	<!-- A flat value that is added to the character who loots the block after the LootStageMod is applied. -->
+	<property name="LockPickItem" value=""/>
+	<!-- The name of the item that is consumed when picking the lock of this block. -->
+	<property name="LockPickTime" value="1"/>
+	<!-- Time in seconds for the player to pick the lock of this container. -->
+	<property name="LockPickBreakChance" value="0.0"/>
+	<!-- A value between 0 and 1 to determine how likely the lockpick item is to break. -->
+	
+
+** Sign **
+<!-- A deprecated block class that was ordinarily used for signs that were more than one block tall. If you are using this block class, consider not specifying it and using the MultiBlockDim property to specify your block height instead, as this class offers no additional functionality. -->
+<property name="Class" value="Sign"/>
+
+Additional Properties:
+	<property name="UpwardsCount" value="1"/>
+	<!-- Use MultiBlockDim instead to specify the height of the block. This is deprecated. -->
+
+
+** Sleeper **
+<!-- A positional block that is used in POIs that spawns sleepers when a player enters. -->
+<property name="Class" value="Sleeper"/>
+
+Additional Properties:
+	<property name="Pose" value="0"/>
+	<!-- Number to determine the pose of the sleeper block from its entity class. -->
+	<property name="LookIdentity" value="1,0,0"/>
+	<!-- The direction that the sleeper is looking in. -->
+	<property name="ExcludeWalkType" value=""/>
+	<!-- This is used to make sure certain walk types do not spawn, such as crawlers for a standing pose. Currently the only value you can specify is 'Crawler' because it is hardcoded to error out if you specify the walk type by number. Is it stupid? Yes. Is it simple to fix by making a new enum and assigning it to each walk type? Also yes. Conclude from that what you will. -->
+	<property name="SpawnGroup" value=""/>
+	<!-- If this sleeper block is limited to spawning only a certain group of zombies, specify the name of the entitygroup here. -->
+	<property name="SpawnMode" value=""/>
+	<!-- 
+	If the sleeper should only spawn under a certain condition, this is used to specify that. For example, if the sleeper only spawns if the quest POI is set to Infested. Possible values are 
+	- Normal 	Sleeper will spawn under normal circumstances.
+	- Bandit 	Appears to be a placeholder for the future. You can use use a bandit group if you are making your own bandits.
+	- Infested	Sleeper will only spawn in Infested POIs.
+	-->
+
+
+** SleepingBag **
+<!-- This is for any block that sets a player spawn point when placed down in the world. Bedrolls and crafted beds have this property. -->
+<property name="Class" value="SleepingBag"/>
+
+Additional Properties:
+	<!-- None -->
+	
+	
+** SolarPanel **
+<!-- A block that gives power based on the items inside it, but does not consume fuel or have a maximum power output.. -->
+<property name="Class" value="SolarPanel"/>
+
+Additional Properties:
+	<property name="SlotItem" value=""/>
+	<!-- The name of the item that needs to be placed in a slot to make the generator work. -->
+	<property name="OutputPerStack" value="1"/>
+	<!-- How much power is output from each item in the slots of the generator. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+	
+	
+** SpawnEntity **
+<!-- A block that spawns an entity when instantiated and acts as a static spawner. -->	
+<property name="Class" value="SpawnEntity"/>
+
+Additional Properties:
+	<property name="SpawnClass" value=""/>
+	<!-- A comma-separated list of entity names that this block can spawn. -->
+
+
+** Speaker **
+<!-- A block that produces a sound when powered. -->
+<property name="Class" value="Speaker"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- The amount of power needed by this block. -->
+	<property name="PlaySound" value=""/>
+	<!-- This is the sound that will be played when the block is powered. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+
+** SpeakerTrader **
+<!-- The speaker block found outside trader POIs to announce opening and closing times. -->
+<property name="Class" value="SpeakerTrader"/>
+
+Additional Properties:
+	<property name="OpenSound" value=""/>
+	<!-- The sound that plays when the trader opens. -->
+	<property name="CloseSound" value=""/>
+	<!-- The sound that plays when the trader closes. -->
+	<property name="WarningSound" value=""/>
+	<!-- The sound that plays when the trader is closing soon. -->
+	
+	
+** Spikes **
+<!-- A very old block class that extends from the Damage class but does not offer any additional functionality. Just use the Damage class instead. -->
+<property name="Class" value="Spikes"/>
+
+Additional Properties:
+	<property name="Damage" value="0"/>
+	<!-- How much damage is done to the entity that collides with or walks on this block. -->
+	<property name="Damage_received" value="0" />
+	<!-- How much damage is taken by the block after damaging an entity that collides with or steps on it. -->
+	<property name="DamageType" value="" />
+	<!--
+	The type of damage done by this block. Used by entityclasses for immunities, eg if it does disease damage zombies won't feel it because they are immune to it.
+	Possible damage types are: None Piercing Slashing Bashing Crushing Corrosive Heat Cold Radiation Toxic Electrical Disease Infection Starvation Dehydration Falling Suffocation BloodLoss Sprain Break Stun Concuss KnockOut BlackOut KnockDown BarbedWire Suicide VehicleInside
+	-->
+	<property name="DontDamageOnTouch" value="false"/>
+	<!-- This property actually does nothing. Assuming this was to make spikes not take damage. Just set Damage_received to zero to achieve the same effect and use the Damage block class instead. -->
+
+
+** Spotlight **
+<!-- A powered light that has no extra configurable options. -->
+<property name="Class" value="Spotlight"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- The amount of power needed by this block. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+	
+	
+** Switch **
+<!-- Used to turn on and off power through a system. -->
+<property name="Class" value="Switch"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- The amount of power needed by this block. -->
+	<property name="TriggerType" value=""/>
+	<!-- 
+	The type of power trigger that occurs. Seems to be hardcoded in most instances even though the player switch defines it. Possible values are:
+	- Switch			Block is on or off depending on the state of a switch.
+	- PressurePlate		Block is on when an entity is stepping on it.
+	- Motion 			Block is on when it detects entities.
+	- TimerRelay		Block is on between certain times of the day.
+	- TripWire			Block is on when an entity crosses a tripwire.
+	-->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+
+** TallGrass **
+<!-- An extension of the Plant class that only seems to be used for randomizing the rotations. -->
+<property name="Class" value="TallGrass"/>
+
+Additional Properties:
+	<property name="FertileLevel" value="1"/>
+	<!-- The fertile level of the block beneath the plant in order for it to survive. -->
+	<property name="LightLevelStay" value="1"/>
+	<!-- The amount of light needed for the block to survive. -->
+	
+	
+** TimerRelay **
+<!-- A relay that is set to pass power on only at certain times of the day. -->
+<property name="Class" value="TimerRelay"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- The amount of power needed by this block. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+
+** TNT **
+<!-- A similar functionality to CarExplode but blows up from ANY damage source. -->
+<property name="Class" value="TNT"/>
+
+Additional Property Classes:
+	<!-- Explosion -->
+	<!-- Used to contain all explosive properties of the block. Not sure why these use a dedicated class and other blocks that satisfy explosions do not, but this is the norm for these types of blocks. -->
+	<property class="Explosion">
+		<property name="ParticleIndex" value="0"/>
+		<!-- The particle index of the explosion when the block is destroyed to trigger it. -->
+		<property name="RadiusBlocks" value="1"/>
+		<!-- How far the explosion damages blocks in a radius around it. -->
+		<property name="BlockDamage" value="1"/>
+		<!-- How much damage is done to the blocks inside the RadiusBlocks, with the actual value being applied at the epicentre and falling off as the blocks are further from the point. -->
+		<property name="RadiusEntities" value="1"/>
+		<!-- How far the explosion damages entities in a radius around it. -->
+		<property name="EntityDamage" value="1"/>
+		<!-- How much damage is done to the entities inside the RadiusEntities, with the actual value being applied at the epicentre and falling off as the entities are further from the point. -->
+	</property>
+
+
+** Torch **
+<!-- Used for the torch in a very specific way to define particle offsets depending on what way the torch is facing. -->
+<property name="Class" value="Torch"/>
+
+Additional Properties:
+	<!-- None -->
+	
+
+** TorchHeatMap **
+<!-- Functionally the same as the Torch block class but also gives off heat as well. -->
+<property name="Class" value="TorchHeatMap"/>
+
+Additional Properties:
+	<property name="HeatMapStrength" value="0"/>
+	<!-- The amount of heat the workstation gives out per interval. -->
+	<property name="HeatMapTime" value="1"/>
+	<!-- How long the heat lasts for before disappearing. -->
+	<property name="HeatMapFrequency" value="1"/>
+	<!-- How long between each heat map generation. -->
+	
+	
+** TrapDoor **
+<!-- When stepped on, the block will destroy or downgrade after a short delay. -->
+<property name="Class" value="TrapDoor"/>
+
+Additional Properties:
+	<property name="TriggerDelay" value="1.0"/>
+	<!-- Time in seconds until the trap triggers, destroying the block the player is stood on. -->
+	<property name="TriggerSound" value=""/>
+	<!-- The sound that plays when the trap is triggered. -->
+	
+	
+** TripWire **
+<!-- When connecting two of these together will create a wire that, when crossed by an entity, will allow poawer to pass through. -->
+<property name="Class" value="TripWire"/>
+
+Additional Properties:
+	<property name="RequiredPower" value="1"/>
+	<!-- The amount of power needed by this block. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+
+** Trunk **
+<!-- A deprecated block class that offers no new functionality. -->
+<property name="Class" value="Trunk"/>
+
+Additional Properties:
+	<!-- None -->
+	
+	
+** TrunkTip **
+<!-- Acts very similar to the Damage class but only damages things that collide with one side. Used by spikes and large wooden stakes. -->
+<property name="Class" value="TrunkTip"/>
+
+Additional Properties:
+	<property name="Damage" value="0" />
+	<!-- How much damage is done to the entity that collides with or walks on this block. -->
+	<property name="Damage_received" value="0" />
+	<!-- How much damage is taken by the block after damaging an entity that collides with or steps on it. -->
+	<property name="DamageType" value="" />
+	<!--
+	The type of damage done by this block. Used by entityclasses for immunities, eg if it does disease damage zombies won't feel it because they are immune to it.
+	Possible damage types are: None Piercing Slashing Bashing Crushing Corrosive Heat Cold Radiation Toxic Electrical Disease Infection Starvation Dehydration Falling Suffocation BloodLoss Sprain Break Stun Concuss KnockOut BlackOut KnockDown BarbedWire Suicide VehicleInside
+	-->
+
+
+** UpgradeRated **
+<!-- A similar class to PlantGrowing, but does not check for fertility level of the block beneath it in order to determine whether the block can change to another one. -->
+<property name="Class" value="UpgradeRated"/>
+
+Additional Properties:
+	<property name="UpgradeRated.ToBlock" value=""/>
+	<!-- The name of the block that this one upgrades to after the time passes. -->
+	<property name="UpgradeRated.BlockCombined" value=""/>
+	<!-- An optional property that can upgrade adjacent blocks. Not too clear on how it works but uses a block name to specify the neighbor block. -->
+	<property name="UpgradeRated.Rate" value="1"/>
+	<!-- The rate at which the block upgrades, minimum value of 1, and has to be an integer. -->
+
+
+** VendingMachine **
+<!-- Allows the block to open up a trader loot list when interacted wtih. -->
+<property name="Class" value="VendingMachine"/>
+
+Additional Properties:
+	<property name="TraderID" value="0"/>
+	<!-- An ID for a trader from traders.xml. -->
+	<property name="Buff" value=""/>
+	<!-- A buff applied to any entity that attacks this block. -->
+	
+
+** Workstation **
+<!-- Allows you to use this block as a means of crafting items. You can assign recipes to it and a craft area that can be used by the recipes.xml and even add your own tools. -->
+<property name="Class" value="Workstation"/> 
+
+Additional Properties:
+	<property name="OpenSound" value=""/>
+	<!-- The sound played when the workstation UI is opened. -->
+	<property name="CloseSound" value=""/>
+	<!-- The sound played when the workstation UI is closed. -->
+	<property name="CraftSound" value=""/>
+	<!-- The sound played when a crafting operation is started. -->
+	<property name="CraftCompleteSound" value=""/>
+	<!-- The sound played when an item craft operation is finished. -->
+	<property name="ParticleName" value=""/>
+	<!-- Optional particle effect that plays when turned on. -->
+	<property name="ParticleOffset" value="0,0,0"/>
+	<!-- Three numbers dictating the X,Y,Z offset of the particle effects -->
+	<property name="WorkstationIcon" value=""/>
+	<!-- The icon that is displayed next to recipes that need this workstation to craft. --> 
+	<property name="WorkstationJournalTip" value=""/>
+	<!-- The journal tip that pops up when using the workstation for the first time. -->
+	<property name="CraftIcon" value=""/>
+	<!-- The icon used next to the 'Craft' button on the workstation's UI. -->
+	<property name="CraftActionName" value=""/>
+	<!-- Localization key for text that should appear on the 'Craft' button on the workstation's UI. -->
+	<property name="HeatMapStrength" value="0"/>
+	<!-- The amount of heat the workstation gives out per interval. -->
+	<property name="HeatMapTime" value="1"/>
+	<!-- How long the heat lasts for before disappearing. -->
+	<property name="HeatMapFrequency" value="1"/>
+	<!-- How long between each heat map generation. -->
+	<property name="TakeDelay" value="2"/>
+	<!-- If a land claim block is placed, how long in seconds is needed to pick this block up directly. -->
+
+</blocks_information>

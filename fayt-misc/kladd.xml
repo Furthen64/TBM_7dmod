@@ -1,0 +1,45 @@
+<recipes> 
+	<recipe name="TunnelBoringMachine" count="1" craft_area="workbench" >
+	
+		<!-- see what we wrote on the FLIP Whiteboard at work -->
+		<ingredient name="resourceDuctTape" count="200" />
+		<ingredient name="resourceForgedIron" count="200" />
+		<ingredient name="resourceMechanicalParts" count="200" />
+		
+	</recipe> 
+	
+</recipes>
+
+<!--
+
+ELEMENTS AND ATTRIBUTES
+What are the names of all the elements in the XML?
+What are the names of some attributes in the XML?
+What are the values of some attributes in the XML?
+What is the name of the ROOT element of the XML document?
+How many elements contain a craft_area attribute?
+How many elements contain a count attribute with a value of 1?
+
+
+BASIC XPATH (You'll need this for about 90% of what you do)
+What XPath can we use to select the recipes element?
+
+What XPath can we use to select every recipe element inside the recipes one?
+What XPath can we use to select only the recipe who has a name of drinkJarBoiledWater?
+What XPath can we use to select every ingredient inside the mineCandyTin recipe?
+What XPath can we use to select every ingredient that has a count attribute equal to 1?
+What XPath can we use to select every ingredient that has a count attribute NOT equal to 1?
+What XPath can we use to select both the drinkJarBoiledWater and drinkJarGoldenRodTea recipes?
+What XPath can we use to select only those recipes with a craft_tool attribute?
+What XPath can we use to select the value of the drinkJarBoiledWater recipe's craft_tool attribute?
+What XPath can we use to select the value of the craft_area attribute for the drinkJarGoldenRodTea recipe?
+What XPath can we use to select only a recipe that does NOT have a craft_area attribute?
+
+INDEX LOOKUP EXAMPLES (You may need this in certain situations)
+What XPath can we use to select the first recipe WITHOUT using its name attribute value?
+What XPath can we use to select the second recipe WITHOUT using its name attribute value?
+What XPath can we use to select the third ingredient of the mineCandyTin recipe?
+What XPath can we use to select the last recipe in the XML no matter how many recipes there are?
+What XPath can we use to select the second-to-last recipe in the XML no matter how many recipes there are?
+
+-->

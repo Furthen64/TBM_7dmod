@@ -1,0 +1,418 @@
+<!-- QUEST LAYOUT FOR NORMAL QUESTS -->
+<!-- Copy and paste if you need a basic layout to use. -->
+
+<quest id="questID">
+	<!-- Main Properties (see Quest Properties for a list) -->
+	<!-- Required -->
+	<property name="group_name_key" value=""/> 
+	<property name="name_key" value=""/>
+	<property name="subtitle_key" value=""/>
+	<property name="description_key" value=""/>
+	<property name="icon" value=""/>
+	<property name="category_key" value="quest"/>
+	<property name="difficulty" value=""/> <!-- veryeasy, easy, medium, hard, insane -->
+	<property name="offer_key" value=""/>
+	<property name="shareable" value=""/>
+	
+	<!-- Optional -->
+	<property name="quest_hints" value="" />
+	
+	<!-- OBJECTIVES & ACTIONS (all optional, see Actions & Objectives for a list) -->
+	<!--
+	<action type="" id="" value="" attribute="">
+		<property name="*" value="**" />
+	</action>
+	-->
+	<!--
+	<objective type="" id="" value="" attribute="">
+		<property name="*" value="**" />
+	</objective>
+	-->
+	
+	<!-- REWARD TYPES (all optional, see Reward Types for a list -->
+	<!--
+	<reward type="" attribute="" />
+	-->
+</quest>
+
+
+<!--
+QUEST PROPERTIES
+Localization keys used in quests.
+
+GROUP NAME KEY: The name of the group that has the quests in.
+group_name_key: quest_BasicSurvival -> Basic Survival
+
+NAME KEY: The name of the quest chain plus the progression, as an example.
+name_key: quest_BasicSurvival1 -> Basic Survival 1/8
+
+SUBTITLE KEY: The short, sharp summary of the quest displayed in the top right of the screen.
+subtitle_key: quest_BasicSurvival1_subtitle -> Craft a Bedroll
+
+DESCRIPTION KEY: The long description shown in the large window when opening up the quest log in the journal.
+description_key: quest_BasicSurvival1_description -> "Craft a Bedroll by gathering plant fibers. Once you have the ingredients open your crafting inventory, navigate to the basics recipe category, highlight the recipe and click the craft button.\n\nPlace the Bedroll in the world by first equipping it and using the secondary action key. Once placed you'll see a Bed Icon on your compass and map. This will lead you back to your home and will act as a re-spawn point if you die."
+
+OFFER KEY: The text that displays in the window BEFORE the quest is accepted or started.
+offer_key: quest_BasicSurvival_offer -> "Dear Friend,\nAs you know the wasteland can be an unforgiving place and from our observations you look like you could use some help. Here’s a little guide to help a newcomer survive.  Think of it as our little initiation. Complete it to our liking and we just might take in a new citizen. The White River Settlement, it’s real and it’s safe.\n\n Good Luck Noah"
+
+QUEST HINTS: The hints shown underneath the quest subtitle for more information.
+quest_hints: quest_BasicSurvival1_hint1 -> [00FF00]Press [-][FFB400][action:local:Primary] to punch grass to harvest [-][00FF00]Plant Fibers[-][FFB400].[-]
+
+
+QUEST ACTION TYPES
+<action type="" id="" value="" ...Attributes>
+	<property name="*" value="**">
+	<property name="*" value="**">
+</action>
+
+GameEvent: Trigger a game event.
+Full variable support: Yes
+Property (name="*" value="**")
+	* event: ** The name of the game event to be triggered.
+	* phase: ** The phase of the quest to determine the order.
+
+ShowTip: Shows an onscreen message.
+Full variable support: Yes
+Attributes: 
+	value: The name of the tip entry to show.
+Property (name="*" value="**")
+	* phase: ** The phase of the quest to determine the order.
+	
+SpawnEnemy: Spawns enemy from a list of enemies.
+Full variable support: No, only number of entities can be modified.
+Attributes
+	id: The list of entities to choose from to spawn.
+	value: The number to spawn.
+Property (name="*" value="**")
+	* phase: ** The phase of the quest to determine the order.
+	
+SpawnGSEnemy: Spawns enemies from a gamestage list.
+Full variable support: Yes
+Property (name="*" value="**")
+	* gamestage_list: ** The name of the gamestage list from gamestages.xml.
+	* count: ** The number of enemies to spawn.
+	* phase: ** The phase of the quest to determine the order.
+
+TrackQuest: Adds the quest to the tracker.
+Full variable support: Not needed
+Property (name="*" value="**")
+	* phase: ** The phase of the quest to determine the order.
+
+UnlockPOI: Unlocks the POI doors.
+Full variable support: Not needed
+Property (name="*" value="**")
+	* phase: ** The phase of the quest to determine the order.
+
+
+QUEST OBJECTIVE TYPES 
+<objective type="" id="" value="" ...Attributes >
+	<property name="*" value="**" />
+	<property name="*" value="**" />
+</objective>
+
+BlockActivate: Requires you to activate a block in the world. 
+Full variable support: No. Only the number of activations is supported.
+Attributes:
+	id: The block that you need to activate.
+	value: How many blocks you need to activate.
+	phase: The phase of the quest to determine the order.
+
+BlockPickup: Requires you to pick up a block in the world. 
+Full variable support: No. Only the number of block pickups is supported.
+Attributes:
+	id: The block that you need to pick up.
+	value: How many blocks you need to pick up.
+	phase: The phase of the quest to determine the order.
+
+BlockPlace: Requires you to place a block in the world. 
+Full variable support: No. Only the number of block placements is supported.
+Attributes:
+	id: The block that you need to place in the world.
+	value: How many blocks you need to place in the world.
+	phase: The phase of the quest to determine the order.
+
+BlockUpgrade: Requires you to upgrade a block in the world. 
+Full variable support: No. Only the number of block upgrades is supported.
+Attributes:
+	id: The block that you need to upgrade.
+	value: How many blocks you need to upgrade.
+	phase: The phase of the quest to determine the order.
+
+Buff: Requires you have a buff. 
+Full variable support: No.
+Attributes:
+	id: The buff that you need to have on your character.
+	phase: The phase of the quest to determine the order.
+
+ClearSleepers: Clear out all sleeper volumes in the POI.
+Full variable support: Yes
+Property (name="*" value="**")
+	* nav_object: ** The nav object that is displayed on the compass, from nav_objects.xml
+	* phase: ** The phase of the quest to determine the order.
+
+ClosestPOIGoTo: Go to the closest POI regardless of tier.
+Full variable support: Yes
+Property (name="*" value="**")
+	* distance: ** The search distance for the POI.
+	* phase: ** The phase of the quest to determine the order.
+
+Craft: Required to craft an item. NOTE: If the item to craft is on a workstation, you MUST be in the workstation when the item finished crafting to have it register. Recommended to only use craft for backpack items and for items you can't get naturally, otherwise always use FetchKeep.
+Full variable support: Yes, when using properties. If using attributes, only the number of items needed to craft is supported.
+Attributes:
+	id: The name of the item or block to craft as defined in items.xml / blocks.xml.
+	value: The number of items needed.
+	phase: The phase of the quest to determine the order.
+Property (name="*" value="**")
+	* item: ** The ID of the item or block you want to craft as shown in items.xml / blocks xml.
+	* count: ** A positive number depicting how many items have to be crafted.
+	* phase: ** A positive number showing the phase, to determine order.
+Special note:
+It is better to use the properties to determine the crafting so that you can make them accessible to variables. Variables can only change value attributes.
+<objective type="Craft">
+	<property name="item" value="" param1="Item1Name" />
+	<property name="count" value="" param1="Item1Count" />
+	<property name="phase" value="" />
+</objective>
+
+EntityKill: Need to kill a certain number of entities to proceed.
+Full variable support: Yes
+Property (name="*" value="**")
+	* entity_names: ** A list of entity names from entityclasses.xml. You can also put a * to specify any entity. Is not used if target_tags is set.
+	* target_tags: ** A list of tags that the entities have to have. For example 'radiated'.
+	* needed_count: ** How many entities are needed to kill.
+	* objective_name_key: ** The localization key for the object. This covers the case of saying "Feral Zombies" etc.
+	* phase: ** The phase of the quest to determine the order.
+
+ExchangeItemFrom: Exchange an expected item using the ExchangeItem item action.
+Full variable support: No, only the number of items needed to exchange is supported.
+Attributes:
+	* id: The item name as it shows in items.xml.
+	* value: The number of items needed to be exchanged.
+	* phase: The phase of the quest to determine the order.
+
+Fetch: Fetch an item, and hand it in on quest completion. WARNING: Can cause red text if you don't have the fetched item to hand in at the end. Recommend if you're doing a Fetch, have it a single phase quest to avoid it.
+Full variable support: No, only the amount of items to fetch is supported.
+Attributes:
+	id: The item or block name as found in items/blocks xml
+	value: How many you need to fetch.
+	phase: The phase of the quest to determine the order.
+
+FetchAnyContainer: Fetch a quest item from a container regardless of index.
+Full variable support: Yes
+Property (name="*" value="**")
+	* quest_item: ** The item ID as shown in items.xml / blocks.xml
+	* quest_item_ID: ** The internal item ID integer. Leave out to use the name.
+	* item_count: ** How many need to be found.
+	* default_container: ** The block ID of the container that has the item.
+	* phase: ** The phase of the quest to determine the order.
+
+FetchFromContainer: Fetch a quest item from a container that has an IndexName of FetchContainer.
+Full variable support: Yes
+Property (name="*" value="**")
+	* fetch_mode: 
+		** standard: Normal
+		** hidden_cache: Hidden crate.
+	* quest_item: ** The item ID as shown in items.xml / blocks.xml
+	* quest_item_ID: ** The internal item ID integer. Leave out to use the name.
+	* item_count: ** How many need to be found.
+	* default_container: ** The block ID of the container that has the item.
+	* phase: ** The phase of the quest to determine the order.
+	
+FetchKeep: Fetch an item, and keep it when the quest is complete.
+Full variable support: No, only the number of fetches needed is supported.
+Attributes:
+	id: The item or block name as found in items/blocks xml
+	value: How many you need to fetch.
+	phase: The phase of the quest to determine the order.
+	
+GameEvent: Complete a Game Event to proceed.
+Full variable support: Yes
+Property (name="*" value="**":
+	* event: ** The name of the event in gameevent.xml.
+	* event_tag: ** The event must have this tag. Defaults to quest.
+	* phase: ** The phase of the quest to determine the order.
+
+GoTo: Go to a certain area.
+Full variable support: Yes, if using properties. If using attributes, only the distance to travel is supported.
+Attributes: 
+	id: The id of the place to go to. 
+		trader
+	value: How far to go, or finds nearest if above this amount.
+	phase: The phase of the quest to determine the order.
+Property (name="*" value="*")
+	* biome_filter_type
+		** OnlyBiome : Only places in this list of biomes from biome_filter.
+		** SameBiome : Must be in the same biome.
+		** ExcludeBiome : Places NOT in this list of biomes from biome_filter.
+	* biome_filter_type : pine_forest,burnt_forest,desert,snow,wasteland
+	* distance: ** How far to go.
+	* location: ** The location you need to go to. trader
+	* nav_object: ** The name of the nav_object from nav_objects.xml to show on the compass and in the world.
+Special note: It is better to use the properties so all parameters can be supported by variables.
+
+InteractWithNPC: Interact with an NPC in the area. Use this in the phase AFTER you have gotten to the area needed with GoTo or POIGoTo
+Full variable support: Yes
+Property (name="*" value="**")
+	* use_closest: ** true / false - Whether the closest NPC is selected.
+	* nav_object: ** The name of the nav_object from nav_objects.xml to show on the compass and in the world. 
+	* phase: ** The phase of the quest to determine the order.
+
+OpenWindow: Open a window, such as open inventory window.
+Full variable support: No
+Attributes:
+	id: The window id as it appears in windows.xml
+	phase: The phase of the quest to determine the order.
+
+POIBlockActivate: Activate a block in a POI and trigger an event.
+Full variable support: Yes
+Property (name="*" value="**")
+	* block_index: ** The name of the block index from BlockIndex in blocks.xml.
+	* nav_object: ** The compass icon that displays as defined in nav_objects.xml.
+	* complete_event: ** The Game Event that triggers when the block is activated.
+	* phase: ** The phase of the quest to determine the order.
+
+POIStayWithin: Have to stay within a certain radius of the POI or fail the quest.
+Full variable support: Yes
+Property (name="*" value="**")
+	* radius: ** The distance around the border of the POI you need to stay within.
+	* phase: ** The phase of the quest to determine the order.
+
+RallyPoint: Head to a rally point.
+Full variable support: Yes
+Property (name="*" value="**")
+	* allowed_start_hour: ** A number between 0 and 23. If before this hour the quest can't continue.
+	* allowed_end_hour: ** A number between 0 and 23. If after this hour the quest can't continue.
+	* nav_object: ** The icon that appears on the compass, as defined in nav_objects.xml.
+	* complete_event: ** The game event that triggers after the quest is complete.
+	* phase: ** The phase of the quest to determine the order.
+	
+RandomGotoNPC: Go to a random point or NPC. Usually used for random points though.
+Full variable support: Yes
+Property (name="*" value="**")
+	* completion_distance: ** A number which will complete this phase of the quest once you are within the radius of the target point.
+	* distance: ** Two numbers separated by a - for minDistance-maxDistance. Example: 20-400.
+	* nav_object: ** The nav object that appears on the compass as defined in nav_objects.xml.
+	* phase: The phase of the quest to determine the order.
+
+RandomPOIGoto: Go to any random POI.
+Full variable support: Yes
+Property (name="*" value="**")
+	* biome_filter_type:
+		** OnlyBiome: Must only be in the list of biomes specified by biome_filter. 
+		** SameBiome: Must be within the same biome.
+		** ExcludeBiome : Places NOT in this list of biomes from biome_filter.
+	* biome_filter_type : pine_forest,burnt_forest,desert,snow,wasteland
+	* nav_object: ** The name of the nav_object from nav_objects.xml to show on the compass and in the world.
+	* poi_tier: ** The tier of the POI. Does not need to be specified.
+	* phase: ** The phase of the quest to determine the order.
+	
+Repair: Repair an item.
+Full variable support: No, only the amount of items to repair is supported.
+Attributes:
+	* id: The item that needs to be repaired.
+	* value: The number of items that need to be repaired.
+	* phase: The phase of the quest that determines the quest order.
+
+ReturnToNPC: Return to the NPC that gave the quest.
+Full variable support: Yes
+Property (name="*" value="*")
+	* nav_object: ** The nav object that displays on the compass as defined in nav_objects.xml.
+	* phase: ** The phase of the quest to determine the order.
+	
+Scrap: Scrap an item.
+Full variable support: No, only the number of items to be scrapped.
+Attributes:
+	id: The item or block ID that must be scrapped.
+	value: The number of items that need to be scrapped.
+	phase: The phase of the quest to determine the order.
+	
+SpendSkillPoints: Spend skill points, on any perk or a particular perk.
+Full variable support: No, only the number of skill points to be spent.
+Attributes:
+	id: The name of the perk, or * for any perk.
+	value: The number of skill points you need to spend.
+	phase: The phase of the quest to determine the order.
+	
+TreasureChest: You need to dig up a treasure chest.
+Full variable support: Yes
+Property (name="*" value="**")
+	* block: ** The ID of the block as defined in blocks.xml, should be a loot container.
+	* alt_block: ** An alternative block ID that has a chance of being found instead.
+	* distance: ** Two numbers separated by a dash in the form minDistance-maxDistance.
+	* default_radius: ** The radius that the treasure could be in. 
+	* nav_object: ** The nav object that shows on the compass as defined in nav_objects.xml.
+	* direct_nav_object: ** The nav object of the treasure chest block after the radius is reduced to zero.
+	* blocks_per_reduction: ** How many blocks need to be destroyed to reduce the treasure radius.
+	* radius_reduction_sound: ** The sound name as defined in sounds.xml when the radius reduces.
+	* explosion_event: ** The game event that triggers once the chest is opened and looted as defined in gameevents.xml.
+	* phase: ** The phase of the quest to determine the order.
+
+Wear: Required to wear a certain item.
+Full variable support: No.
+Attributes:
+	id: The item ID of the apparel that needs to be worn.
+	phase: The phase of the quest to determine the order.
+
+
+REWARD TYPES
+<reward type="" ...Attributes />
+
+Exp: Gives the player a set amount of experience points.
+Attributes:
+	value: The number of experience points given.
+	stage: When the reward is given. 
+		- start: Given to you when the quest begins.
+		- complete: Given to you when the quest has been completed.
+		- aftercomplete: Given to you when the quest completes and any dialogue is done
+	hidden: Whether the reward shows up on your quest journal.
+	chainreward: Whether this is a completed quest chain reward.
+
+Item: Gives an item to the player directly on completion.
+Attributes:
+	id: The item ID as shown in items.xml or blocks.xml.
+	value: The number of items to be given.
+	stage: When the reward is given. 
+		- start: Given to you when the quest begins.
+		- complete: Given to you when the quest has been completed.
+		- aftercomplete: Given to you when the quest completes and any dialogue is done
+	hidden: Whether the reward shows up on your quest journal.
+	chainreward: Whether this is a completed quest chain reward.
+
+Level: Levels up the player character.
+Attributes:
+	stage: When the reward is given. 
+		- start: Given to you when the quest begins.
+		- complete: Given to you when the quest has been completed.
+		- aftercomplete: Given to you when the quest completes and any dialogue is done
+	hidden: Whether the reward shows up on your quest journal.
+	chainreward: Whether this is a completed quest chain reward.
+	
+
+
+
+QUEST TEMPLATE AND SETTING VARIABLES
+You can make quests inherit all the properties of previous quests by using the attribute template="questNameToInherit". An example is
+<quest id="tier6_fetch_clear" template="tier2_fetch_clear">
+</quest>
+
+When extending quests, you can set any variable by name using
+<variable name="varName" value="varValue" />
+
+The variable can be used to overwrite any value attribute of any property specified within the quests.xml, allowing you to make templates for certain quest types and change them in just a few lines.
+
+In order to apply those variables to properties in quests that use a base quest as a template, add a param1="varName" to each property you want to change in the quest template that you want the variable to overwrite.
+
+For example here is how you'd set up a variable to overwrite the name_key property in a quest that extends from a base quest.
+
+<quest name="myFirstQuest">
+	<name_key="myFirstQuest_name" param1="QuestName" />
+</quest>
+
+<quest name="mySecondQuest">
+	<variable name="QuestName" value="mySecondQuest_name" />
+</quest>
+
+You can overwite ANY properties with variables including actions and sequences, but note that not all actions and objectives have full variable support (in particular those that are written in shorthand rather than explicitly stating each property). For a detailed list of which actions and objectives have full variable support, check each one above for further details.
+
+Note that quest rewards are NOT carried over to new quests and therefore variables don't work with them - you must specify a reward type for every quest that you want to have rewards for.
+-->

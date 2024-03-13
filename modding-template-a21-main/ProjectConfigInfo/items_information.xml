@@ -1,0 +1,894 @@
+<items_information>
+
+All items are laid out as such:
+<item name="itemName">
+	<!-- Basic Item Properties (As many as needed) -->
+	<property name="" value=""/>
+	
+	<!-- Item Actions (Optional) -->
+	<property class="Action0"> <!-- Left click -->
+		<property name="Class" value="(Item action class)"/>
+		<!-- Additional properties for the item action -->
+		<!-- Requirements for the action to happen -->
+	</property>
+	<property class="Action1"> <!-- Right click -->
+		<property name="Class" value="(Item action class)"/>
+		<!-- Additional properties for the item action -->
+		<!-- Requirements for the action to happen -->
+	</property>
+	<property class="Action2"> <!-- E, only use in certain cases -->
+		<property name="Class" value="(Item action class)"/>
+		<!-- Additional properties for the item action -->
+		<!-- Requirements for the action to happen -->
+	</property>
+	
+	<!-- Wearable items specify the UMA property class -->
+	<property class="UMA">
+		<!-- UMA properties -->
+	</property>
+	
+	<!-- Effect groups (Optional, as many as needed) -->
+	<effect_group name="">
+		<!-- passive_effect, triggered_effect, requirement -->
+	</effect_group>
+</item>
+
+
+
+BASIC ITEM PROPERTIES
+All items can specify properties that gives them common attributes such as their material, if they scrap to anything, their sell value, etc. Below is a list of item properties that all items can specify.
+
+<property name="Extends" value="" param1=""/>
+<!-- 
+This tells the item to inherit ALL* the properties from another item that has already been defined. You can extend from any item as long as that item comes first in the XML load order (as item IDs are defined in order and then extended properties get mapped to the original ID. If you are going to use Extends, it is good practice to make sure you always have this as your very first property, as if you define Extends after some properties, it may overwrite them.
+
+The value attribute must be the name of another item that has already been defined.
+
+The param1 attribute is optional. It is used to specify the list of properties that you do NOT want extended. Write a comma-separated list of the property names.
+
+* The property 'CreativeMode' is never carried over to extended items.
+-->
+
+<property name="CreativeMode" value="" />
+<!-- 
+This is used to show whether the item will show up in creative mode or not. It can be one of the following values:
+- None: The item never shows up in creative mode.
+- Player: The item will show up as normal in the player creative mode.
+- Dev: The item will show up in the player creative mode as long as dev blocks are enabled.
+- Test: The item only shows up in the creative mode if the game is running in unity (used by the devs for test items that should probably not be used in the game).
+-->
+
+<property name="DescriptionKey" value=""/>
+<!-- This is used if you want to specify a different localization key for the item's description, for example if you have a group of items that should all share a description. By default, an item with name "itemName" has a description key of "itemNameDesc" but this property can override it. -->
+
+<property name="UnlockedBy" value=""/>
+<!-- If this item is learnable, specify this so the player can see which perks unlock it. You can specify item names and skill/perk names as seen in progression.xml, in the case your recipe is unlocked by using an item. -->
+
+<property name="Unlocks" value=""/>
+<!-- If this item is used to unlock perks, skills or recipes, these are specified in a comma-separated list. -->
+
+<property name="Tags" value=""/>
+<!-- A comma-separated list of tags that this item has. Tags are used to influence how things like perks and buffs affect their use or stats. -->
+
+<property name="CustomIcon" value=""/>
+<!-- If the item should use the same icon as another item already defined, you can specify the name of that item. By default, CustomIcon is the same as the item name. -->
+
+<property name="CustomIconTint" value="FFFFFF"/>
+<!-- 
+If the icon should be tinted to be a different colour. The value needs to be a 3 or 6 digit hex code where each digit is a hex value, ie 0123456789ABCDEF.
+
+If using 3 digits:
+- The 1st digit defines the red tint. 0 is no tint, F is maximum.
+- The 2nd digit defines the green tint. 0 is no tint, F is maximum.
+- The 3rd digit defines the blue tint. 0 is no tint, F is maximum.
+
+If using 6 digits:
+- The 1st and 2nd digits define the red tint. 00 is no tint, FF is maximum.
+- The 3rd and 4th digits define the green tint. 00 is no tint, FF is maximum.
+- The 5th and 6th digits define the blue tint. 00 is no tint, FF is maximum.
+-->
+
+<property name="ItemTypeIcon" value=""/>
+<!-- The icon that should be shown in the corner of the window next to the main item icon. Appends ui_game_symbol_ to the value, so putting in 'book' would mean the icon selected would be 'ui_game_symbol_book'. -->
+
+<property name="AltItemTypeIcon" value=""/>
+<!-- This icon replaces ItemTypeIcon if the player has used the item at least once. By default it is the same as ItemTypeIcon. -->
+
+<property name="DisplayType" value=""/>
+<!-- This is used to show what information is displayed about the item when you view its stats. All DisplayTypes can be found in ui_display.xml and you can add your own for special items. -->
+
+<property name="HoldType" value="1"/>
+<!-- The way the item is held in the hand. You can find a list of all holdtypes in misc.xml. -->
+
+<property name="Meshfile" value=""/>
+<!-- 
+Path to the mesh file for the item - what it looks like when you are holding it in your hand.
+
+Vanilla paths @:AssetFolder/Path/To/Mesh.prefab
+Modded paths #@modfolder:Path/To/AssetBundle.unity3d?Mesh.prefab
+-->
+
+<property name="HandMeshfile" value=""/>
+<!-- 
+By default this inherits the same property as MeshFile, but if you want to give it a different mesh, specify the path to it using this property. Use case would be a projecile item like a rocket where it would show as the rocket when fired, but show as an item bag in your hand.
+
+Vanilla paths @:AssetFolder/Path/To/Mesh.prefab
+Modded paths #@modfolder:Path/To/AssetBundle.unity3d?Mesh.prefab
+-->
+
+<property name="DropMeshfile" value=""/>
+<!-- 
+Path to the mesh file for the item - what it looks like when it is dropped into the world.
+
+Vanilla paths @:AssetFolder/Path/To/Mesh.prefab
+Modded paths #@modfolder:Path/To/AssetBundle.unity3d?Mesh.prefab
+-->
+
+<property name="TintColor" value="0,0,0"/>
+<!-- Whether the item mesh is tinted or not. Three comma-separated values between 0 and 255 to determine the red, green and blue tint applied. -->
+
+<property name="DropScale" value="1.0"/>
+<!-- When dropped, the item mesh is resized by this amount. -->
+
+<property name="Material" value=""/>
+<!-- The name of the material this item uses (what it's made out of, essentially). All material names are defined in materials.xml and you can add your own materials. -->
+
+<property name="FuelValue" value="0"/>
+<!-- If this item has a fuel value, it means it can be used as fuel in a campfire, forge, or other workstation. The number given shows the burn time in seconds that this gives. -->
+
+<property name="MeltTimePerUnit" value="0.0"/>
+<!-- Time in seconds for how long this item needs to melt into a forge or workstation that uses the same mechanic. -->
+
+<property name="Weight" value="0" />
+<!-- Determines how much units of the base item you get when you put it in a forge or scrap the item. Base item is determined by the material. -->
+
+<property name="NoScrapping" value="true"/>
+<!-- If set to true, this item cannot be scrapped. -->
+
+<property name="CraftingIngredientTime" value=".0"/>
+<!-- If this item is used as a crafting ingredient, this is the amount of time in seconds that it adds to the recipe time. If a recipe specifies a craft_time that uses this item as an ingredient, this property is ignored. -->
+
+<property name="RepairAmount" value="0"/>
+<!-- The amount of durability that this item repairs when used to repair. -->
+
+<property name="RepairTime" value="0"/>
+<!-- The amount of repair time added to the item this is used to repair. -->
+
+<property name="Stacknumber" value="0"/> 
+<!-- How many items you can stack in one inventory slot. Does not work with items that use quality, since each one has individual stats. -->
+
+<property name="EconomicValue" value="0"/>
+<!-- How much this item is worth at the trader. Affected by trader_buy_markup and trader_sell_markdown in traders.xml as well as perks to give the final price of the item when you buy or sell it. -->
+
+<property name="EconomicBundleSize" value="1"/>
+<!-- If this property is specified with a value higher than 1, it means that this number of items is worth the EconomicValue and items can only be bought and sold in stacks of this amount. For example this is used when wood can only be sold in stacks of 100. -->
+
+<property name="SellableToTrader" value="true" />
+<!-- Whether you can sell this item to a trader. Does not affect whether the trader sells the item to you, and you can still specify an EconomicValue so the trader can still sell you an item -->
+
+<property name="TraderStageTemplate" value=""/>
+<!-- Where this item shows up in trader lists. -->
+
+<property name="SoundHolster" value=""/>
+<!-- What sound plays when the item is equipped. -->
+
+<property name="SoundUnholster" value=""/>
+<!-- What sound plays when the item is put away. -->
+
+<property name="Candrop" value="true"/>
+<!-- If set to false the player cannot drop the item -->
+
+<property name="PickupJournalEntry" value=""/>
+<!-- When this item is picked up, a journal entry is added. The value specifies the journal entry key. -->
+
+<property name="Group" value=""/>
+<!-- A comma-separated list of group names. This is mainly used by the ui_display when the item is getting crafted on workstations so that the item is listed under certain categories of that workstation. -->
+
+
+ITEM DURABILITY AND QUALITY PROPERTIES
+These properties only really come into use if items have a durability or quality.
+
+<property name="ShowQuality" value="true"/>
+<!-- Whether the item should show a quality value or not. Used for tools, weapons and armor. -->
+
+<property name="RepairTools" value=""/>
+<!-- The item that is needed to repair this item's durability. -->
+
+<property name="DegradationBreaksAfter" value="false"/>
+<!-- Whether the item is destroyed after the durability reaches 0. -->
+
+<property name="SoundJammed" value=""/>
+<!-- The sound that plays when the item has reached zero durability and is unusable. Only applicable if DegradationBreaksAfter is set to true. -->
+
+<property name="SoundDestroy" value=""/>
+<!-- The sound that plays when the item breaks. Will only play if DegradationBreaksAfter is set to true. -->
+
+
+SITUATIONAL ITEM PROPERTIES:
+These item properties are usually defined only on certain types of items like ammo. You can still use these in any item, but you probably wouldn't notice anything unless the right ItemAction is used with them.
+
+<property name="IsSticky" value="true"/>
+<!-- Whether this item sticks out of a target or not. -->
+
+<property name="StickyOffset" value="0"/>
+<!-- Adjusts the collider of the item when it is sticking to an object. -->
+
+<property name="StickyColliderUp" value="0"/>
+<!-- How far up on the collider the item sticks -->
+
+<property name="StickyColliderRadius" value="0"/>
+<!-- Extends the collider radius of the item when it is sticking. -->
+
+<property name="StickyColliderLength" value="0"/>
+<!-- Adjusts the collider length of the item when it is sticking. -->
+
+<property name="UsableUnderwater" value="false"/>
+<!-- Whether the item can be used underwater, which affects all ItemActions on it. -->
+
+<property name="Damage_type" value=""/>
+<!-- Overrides the damage type dealt by the item when used as ammo. -->
+
+<property name="ThrowableDecoy" value="true"/>
+<!-- Whether this can be used to distract a target -->
+
+<property name="DistractionTags" value="zombie,requires_contact"/>
+<!-- The entities have to have these tags. -->
+
+<property name="EquipSlot" value="" />
+<!-- Used for armor and clothing. Possible values are Head, Chest, Hands,
+Legs, Feet, Eyes, Face, Back -->
+
+
+
+ITEM CLASSES AND ADDITIONAL PROPERTIES
+Some items can have additional classes that have a few extra properties that you can specify. Below is a list of all the relevant classes, what they are used for, and additional properties that you can / should use with them.
+<property name="Class" value="ItemClass you want to use" />
+
+
+** ItemClassQuest **
+<!--Marks the item as a quest item, meaning it will stay with your character on death and only disappears from the inventory on quest completion / failure. -->
+<property name="Class" value="ItemClassQuest"/>
+
+Additional Properties: 
+	<property name="IsQuestItem" value="true" />
+	<!-- Whether the item is a quest item. Seems redundant, but if using ItemClassQuest should probably set this to true. -->
+
+
+** ItemClassTimeBomb **
+<!-- Makes the item behave like a grenade or pipe bomb. Use this with the Activate ItemAction. -->
+<property name="Class" value="ItemClassTimeBomb"/>
+
+Additional Properties:
+	<property name="Explosion.ParticleIndex" value="0"/>
+	<!-- A positive number governing the particle index of the explosion. Set to 0 to disable explosions. -->
+	<property name="Explosion.RadiusBlocks" value="1"/>
+	<!-- A positive number that determines how many meters out from the impact point that blocks will be affected. -->
+	<property name="Explosion.RadiusEntities" value="1"/>
+	<!-- A positive number that determines how many meters out from the impact point that entities will be affected. -->
+	<property name="Explosion.DamageBonus.[MaterialName]" value="1"/> 
+	<!-- You may specify different [MaterialName] properties for this to affect each material differently. A positive number that determines how effective the explosion is against certain materials. 
+	Replace [MaterialNames] with one of the following: earth, stone, wood, metal, organic, water. 
+	For example 0.5 would mean 50% damage dealt to that material type. -->
+	<property name="Explosion.BlastPower" value="0"/> 
+	<!-- A positive number between 0 and 100 which determines how far entities and fallen debris from the explosion gets flung. -->
+	<property name="FuseTime" value="0"/>
+	<!-- A positive number for time in secnds. After activating the item, the explosion is generated after this amount of seconds, whether you have thrown the item or not. -->
+	<property name="FusePrimeOnActivate" value="true"/>
+	<!-- Whether the fuse primes the detonator when activated. Used in grenades but not in pipe bombs. Probably controls the animations of the lighting of the fuse. -->
+	<property name="ExplodeOnHit" value="true"/>
+	<!-- Whether the bomb explodes on contact with another surface, be it a building, a zombie, or a player. -->
+	<property name="StickPercent" value="0"/>
+	<!-- A value between 0 and 1 to determine how sticky the item is, i.e. how much it bounces off other surfaces. -->
+
+
+** ItemClassToggle **
+<!-- Used for things like night vision goggles that toggle on and off. -->
+<property name="Class" value="ItemClassToggle"/>
+
+Additional Properties:
+	<property name="ActivateObject" value="NightVision"/> 
+	<!-- The name of the GameObject transform within the item class that gets toggled on the item itself. -->
+	<property name="ImageEffectOnActive" value="NightVision"/>
+	<!-- The image effect that gets applied when the item is activated. -->
+	<property name="PlaySoundOnActive" value="nightvision_toggle"/>
+	<!-- The sound that should play when the item is activated as defined in sounds.xml. -->
+	<property name="Active" value="false"/>
+	<!-- Whether the item is active by default -->
+
+
+** ItemClassTorch **
+<!-- When the item is equipped it will act as a light source. -->
+<property name="Class" value="ItemClassTorch"/>
+
+Additional Properties:
+	<property name="LightValue" value=".16"/>
+	<!-- The intensity of the light given off by the object. -->
+	<property name="LightSource" value="lightSource"/>
+	<!-- The name of the GameObject transform that is the light source. -->
+	<property name="AlwaysActive" value="true"/>
+	<!-- Whether the light source is always active -->
+
+
+** ItemClassWaterContainer **
+<!-- Whether the item is a water storage. Only affects the BailLiquid ItemAction so only use if you plan to use this. -->
+<property name="Class" value="ItemClassWaterContainer"/>
+
+Additional Properties:
+	<property name="WaterCapacity" value="1"/>
+	<!-- How many units of water is held by this item when full. -->
+	<property name="InitialFillRatio" value="1.0"/>
+	<!-- Percentage of water this item has when made. Value from 0 to 1. -->
+
+
+
+ITEMACTION CLASSES FOR ACTION0, ACTION1, AND ACTION2
+ItemActions determine what the item does when you use that item, depending on what action button is clicked.
+	- Action0: By default, occurs when the left mouse button is clicked.
+	- Action1: By default, occurs when the right mouse button is clicked.
+	- Action2: By default, occurs when the E button is pressed. Not recommended to use unless under very specific circumstances.
+
+All item actions can be subject to requirements that will only allow the action to be performed if the requirements are met. You can set anything that would usually affect buffs as a requirement, such as having a skill level, not being underwater, etc.
+
+<property class="Action0">
+	<property name="Class" value="ItemAction you want to use" />
+	<!-- Additional properties -->
+	<property name="*" value="**" />
+	<!-- Additional property classes (for DynamicMelee) -->
+	<property class="***">
+		<!-- Additional properties inside the class -->
+		<property name="*" value="**" />
+	</property>
+</property>
+
+
+** Activate **
+<!-- Activates the timer on an item. Used for bombs and grenades. -->
+<property name="Class" value="Activate"/>
+
+Additional Properties: 
+	<property name="Delay" value="0"/>
+	<!-- The time it takes to start the timer. Usually this is to sync animation times. -->
+
+
+** BailLiquid **
+<!-- Removes liquid from the item into the world. -->
+<property name="Class" value="BailLiquid"/>
+
+Additional Properties:
+	<property name="Delay" value="0"/>
+	<!-- The time taken to bail the liquid. -->
+	<property name="Sound_start" value=""/>
+	<!-- The sound played as defined in sounds.xml -->
+	
+	
+** Catapult **
+<!-- Used for bows, draw and fire a projectile in an arc. Used to support any ammo types that use the 'Projectile' ItemClass. -->
+<property name="Class" value="Catapult"/>
+
+Additional Properties: 
+	<property name="Hitmask_override" value=""/>
+	<!-- Determines the collider that the item uses. Possible values are Melee, Arrow, Bullet, Rocket and will be used by a block's Collide property. -->
+	<property name="Delay" value="0"/>
+	<!-- The time it takes to fire, but not used if RoundsPerMinute is used from passive effects. Better to use the passive_effect as this entry is somewhat obsolete and cannot be changed by perks etc. -->
+	<property name="Magazine_items" value=""/>
+	<!-- A comma-separated list of items that can be used as ammo. -->
+	<property name="Sound_start" value=""/>
+	<!-- The sound played on projectile fire as defined in sounds.xml. -->
+	<property name="Sound_end" value=""/>
+	<!-- The sound to play after the starting sound as defined in sounds.xml -->
+	<property name="Sound_empty" value=""/>
+	<!-- The sound to play if a dry fire or misfire happens, i.e. when the weapon being fired from loses all durability. -->
+	<property name="Sound_reload" value=""/>
+	<!-- The sound to play when the weapon is being reloaded. -->
+	<property name="Sound_cancel" value=""/>
+	<!-- The sound to play if you undraw the weapon or cancel the shot. -->
+	<property name="Max_strain_time" value=""/>
+	<!-- Time in seconds that the weapon needs to fully charge a shot (seems to not work and is probably related to the draw passive_effect now) -->
+	<property name="ScopeOffset" value="0.0,0.0,0.0"/>
+	<!-- 3 comma-separated numbers that determine the XYZ for the scope when attached to the weapon. -->
+	<property name="SideOffset" value="0.0,0.0,0.0"/>
+	<!-- 3 comma-separated numbers that determine the side view. -->
+	<property name="BarrelOffset" value="0.0,0.0,0.0"/>
+	<!-- 3 comma-separated number that determine where the projectile fires from. -->
+	
+
+** CollectWater **
+<!-- Changes the held item to another item when used to interact with a water source. -->
+<property name="Class" value="CollectWater" />
+
+Additional Properties:
+	<property name="Delay" value="0" />
+	<!-- The length of time that passes before the item change occurs. -->
+	<property name="Change_item_to" value="" />
+	<!-- The name of the item that will replace this one. -->
+	<property name="Sound_start" value="" />
+	<!-- The sound that plays when the change occurs. -->
+
+
+** ConnectPower **
+<!-- Used to attach wires to power sources. -->
+<property name="Class" value="ConnectPower"/>
+
+Additional Properties:
+	<property name="WireOffset" value="0.0,0.0,0.0"/>
+	<!-- Three comma-separated numbers that determine the XYZ position of where the wire is visible. Used to align the wire on your screen whilst moving etc. -->
+	
+	
+** DisconnectPower **
+<!-- Used to remove a wire between two power sources. -->
+<property name="Class" value="DisconnectPower"/>
+
+Additional Properties:
+	<!-- None. -->
+	
+
+** DumpWater ** 
+<!-- Changes the held item to another item and simulates dumping water out. The item needs to have a class of ItemClassWaterContainer. -->
+<property name="Class" value="DumpWater"/>
+
+Additional Properties:
+	<property name="Delay" value="0"/>
+	<!-- The length of time that passes before the item change occurs. -->
+	<property name="Change_item_to" value=""/>
+	<!-- The name of the item that will replace this one. -->
+	<property name="Sound_start" value="" />
+	<!-- The sound that plays when the change occurs. -->
+
+
+** DynamicMelee **
+<!-- Swings the item like a weapon. Used for most melee weapons. -->
+<property name="Class" value="DynamicMelee"/>
+
+Additional Properties:
+	<property name="Sphere" value="1"/>
+	<!-- The radius of the hit sphere. Make larger to require less accuracy and to also hit more things at once. -->
+	<property name="Sound_start" value=""/>
+	<!-- The sound played when the weapon is swumg. -->
+	<property name="UsePowerAttackAnimation" value="false"/>
+	<!-- True or false to determine if the heavy animation is used or not. -->
+	<property name="GrazeStart" value="0.0"/>
+	<!-- The lower radius boundary of where a 'Grazing Hit' occurs. -->
+	<property name="GrazeEnd" value="0.0"/>
+	<!-- The upper radius boundary of where a 'Grazing Hit' occurs. -->
+	<property name="SwingDegrees" value="0"/>
+	<!-- The degree of the swing from start to finish. -->
+	<property name="UseGrazingHits" value="true"/>
+	<!-- True or false if grazing hits are allowed. -->
+	<property name="SwingAngle" value="0"/>
+	<!--The onscreen angle that the swing occurs from. -->
+	
+Additional Property Classes:
+	** HitSounds **
+	<!-- Controls sound overrides when a full hit is detected. -->
+	<property class="HitSounds">
+		<!-- Additional Properties -->
+	</property>
+	
+	Additional Properties:
+		<property name="Override0" value="" param1=""/>: 
+		<!-- This controls the first override of the hit. You can add as many of these as you want with Override1, Override2, etc. 
+			- value: Value of the matrial that is used to trigger the override, such as organic, metal, wood, etc.
+			- param1: The name of the sound to override with as defined in sounds.xml.
+		-->
+		
+	** GrazeSounds -->
+	<!-- Controls sound overrides when a grazing hit is detected. -->
+	<property class="GrazeSounds">
+		<!-- Additional Properties -->
+	</property>
+	
+	Additional Properties:
+		<property name="Override0" value="" param1=""/>: 
+		<!-- This controls the first override of the hit. You can add as many of these as you want with Override1, Override2, etc. 
+			- value: Value of the matrial that is used to trigger the override, such as organic, metal, wood, etc.
+			- param1: The name of the sound to override with as defined in sounds.xml.
+		-->
+
+
+** Eat **
+<!-- Simulates eating or drinking and will directly consume the item. -->
+<property name="Class" value="Eat"/>
+
+Additional Properties: 
+	<property name="Delay" value="0"/>
+	<!-- Time it takes to make the item disappear. -->
+	<property name="Sound_start" value="" />
+	<!-- The sound played when item is consumed. -->
+	<property name="Create_item" value="" />
+	<!-- Item to return when current item is consumed. -->
+	<property name="PromptTitle" value="" />
+	<!-- Localization key of a prompt that the player should see when consuming the item. -->
+	<property name="PromptDescription" value="" />
+	<!-- Localization key of a prompt description that the player should see when consuming the item. -->
+
+** ExchangeBlock **
+<!-- Swaps one block for another when the item is used on it. -->
+<property name="Class" value="ExchangeBlock"/>
+
+Additional Properties
+	<property name="Delay" value="0"/>
+	<!-- Time to use up the item. -->
+	<property name="Sourceblock" value=""/>
+	<!-- Name of the source block that you need to use the item on as defined in blocks.xml. -->
+	<property name="Targetblock" value=""/>
+	<!-- Name of the block that will used to replace the source block as defined in blocks.xml. -->
+	
+
+** ExchangeItem **
+<!-- Swaps all of this item for equal amount of another item when looking at a particular block in the world. -->
+<property name="Class" value="ExchangeBlock"/>
+
+Additional Property (name="*" value="**")
+	<property name="Change_item_to" value=""/>
+	<!-- The item that will be replaced by the held item as defined in items.xml. -->
+	<property name="Change_block_to" value=""/>
+	<!-- Changes the block focused on to this one as defined in blocks.xml. Optional. -->
+	<property name="Focused_blockname_0" value=""/>
+	<!-- The name of a block you have to be looking at as defined in blocks.xml. This is optional if you just want the item to change over, but then you will also have to leave Change_block_to out as well. You can also specify more blocks by using Focused_blockname_1, Focused_blockname_2, etc. -->
+	
+
+** Launcher ** 
+<!-- Fires a projectile without needing to charge it. Used for things like rocket launcher and nailgun. -->
+<property name="Class" value="Launcher"/>
+
+Additional Properties:
+	<property name="Hitmask_override" value=""/>
+	<!-- Determines the collider that the item uses. Possible values are Melee, Arrow, Bullet, Rocket and will be used by a block's Collide property. -->
+	<property name="Delay" value="0"/>
+	<!-- How long it takes to launch the projectile when action is performed. -->
+	<property name="Magazine_items" value=""/>
+	<!-- Comma-separated list of all items that this item can use as ammunition. -->
+	<property name="Reload_time" value="0"/>
+	<!-- Time in seconds to reload a magazine. Better to specify this using passive_effects so that perks can also influence the time, this is somewhat obsolete now. -->
+	<property name="Instantiate_on_load" value="false"/>
+	<!-- Whether this item is fully loaded when created or loaded, true or false. -->
+	<property name="Sound_start" value=""/>
+	<!-- The sound when the item fires the projectile. -->
+	<property name="Sound_repeat" value=""/>
+	<!-- A repeating sound that can play between sound_start and sound_end. -->
+	<property name="Sound_end" value=""/>
+	<!-- Sound played after the start and repeating sounds stop. -->
+	<property name="Sound_empty" value=""/>
+	<!-- Sound played when the item is out of any magazine items to fire. -->
+	<property name="Sound_reload" value=""/>
+	<!-- The sound that plays when the item is reloaded. -->
+	<property name="AutoReload" value="false"/>
+	<!-- Set to true or false. True means the item relaods its magazine_items as soon as the last shot is fired. False means it must first be fired to play the misfire sound or the reload key pressed manually. -->
+	<property name="Particles_muzzle_fire" value=""/>
+	<!-- The particle effect played at the muzzle point when the weapon fires. -->
+	<property name="Particles_muzzle_fire_fpv" value=""/>
+	<!-- The particle effect played as seen from the first person view when the weapon fires. -->
+	<property name="Particles_muzzle_smoke" value=""/>
+	<!-- The particle effect played at the muzzle point after the weapon fires and the muzzle particles are played. -->
+	<property name="Particles_muzzle_smoke_fpv" value=""/>
+	<!-- The particle effect played as seen from the first person view after the weaopn fires and the muzzle particles are played. -->
+	
+	
+** OpenBundle ** 
+<!-- Converts the item into a bundle of separate items. -->
+<property name="Class" value="OpenBundle"/>
+
+Additional Properties 
+	<property name="Create_item" value=""/>
+	<!-- Comma-separated list of items to create when action is performed as defined in items.xml and blocks.xml. -->
+	<property name="Create_item_count" value="0"/>
+	<!-- Comma-separated list of numbers for the items defined in Create_item. -->
+	<property name="Random_item" value=""/> 
+	<!-- Comma-separated list of items to randomly crete when action is performed as defined in items.xml and blocks.xml. -->
+	<property name="Random_item_count" value="0"/>
+	<!-- Comma-separated list of numbers for the items defined in Random_item. -->
+	<property name="Random_count" value="0"/>
+	<!-- How many random items should be given. -->
+	<property name="Unique_random_only" value="true" />
+	<!-- True or false, whether you can have repeated items or not. -->
+
+	
+** OpenLootBundle ** 
+<!-- Converts the item into a bundle defined in loot.xml. -->
+<property name="Class" value="OpenLootBundle"/>
+
+Additional Properties
+	<property name="Consume" value="true"/>: 
+	<!-- True or false, whether the item should be consumed or not. -->
+	<property name="LootList" value="" />
+	<!-- The loot list as defined in loot.xml. -->
+
+
+** PlaceAsBlock **
+<!-- Places a block defined in the world. -->
+<property name="Class" value="PlaceAsBlock"/>
+
+Additional Properties: 
+	<property name="Blockname" value=""/>
+	<!-- The name of the block to place into the world as defined in blocks.xml. -->
+	<property name="Change_item_to" value=""/>
+	<!-- What the item gets turned into. If left blank it will just place a block and use the item up by default. -->
+	
+
+** Projectile ** 
+<!-- Used if the item is an ammo that's fired from the Launcher or Catapult ItemActions. -->
+<property name="Class" value="Projectile"/>
+
+Additional Properties 
+	<property name="DamageEntity" value="1"/>
+	<!-- Entity damage dealt. Only seems to be required for projectiles shot by zombies. Otherwise specify in passive_effect. -->
+	<property name="DamageBlock" value="1"/>
+	<!-- Block damage dealt. Only seems to be required for projectiles shot by zombies. Otherwise specify in passive_effect. -->
+	<property name="Explosion.ParticleIndex" value="0"/>
+	<!-- Number that determines what explosion is played. Leave at 0 to disable explosion effect. -->
+	<property name="Explosion.RadiusBlocks" value="1"/>
+	<!-- Size of area where blocks within the radius of the impact point are affected. -->
+	<property name="Explosion.RadiusEntities" value="1"/>
+	<!-- Size of area where entities within the radius of the impact point are affected. -->
+	<property name="Explosion.DamageBonus.{material}" value="1"/>
+	<!-- Multiplier for explosion to different materials. Replace {material} with the name of your material. Can specify more by using multiple of this property and change the material name for each one you want to use. -->
+	<property name="Explosion.Buff" value=""/>
+	<!-- Comma-separated list of buffs applied to the entities caught into the explosion. -->
+	<property name="Explosion.Duration" value="0"/>
+	<!-- The length that the explosion stays around. -->
+	<property name="Explosion.BlastPower" value="0"/>
+	<!-- The force of the explosion. Highest allowed value is 100. -->
+	<property name="Gravity" value="0"/>
+	<!-- How much the gravity affects the projectile after FlyTime. Set to 0 to not have gravity effects. -->
+	<property name="FlyTime" value="1"/>
+	<!-- How far the projectile flies before gravity starts acting on it. -->
+	<property name="LifeTime" value="1"/>
+	<!-- How long the projectile exists before despawning. -->
+
+
+** Quest **
+<!-- When used the item will trigger a quest for the player. -->
+<property name="Class" value="Quest"/>
+		
+Additional Properties:
+	<property name="QuestGiven" value=""/>
+	<!-- When used, the item will give this quest. -->
+	<property name="Delay" value="0"/>
+	<!-- The delay between using the item and receiving the quest. -->
+	<property name="UseAnimation" value="false"/>
+	<!-- Whether the holding item plays an animation. -->
+
+
+** Ranged **
+<!-- Similar to Projectile, but instead uses a Raycast to determine if there was a hit/ Used on guns mainly. You can change guns to use the Projectile and adjust speed etc to simulate bullet drop if desired. -->
+<property name="Class" value="Ranged"/>
+
+Properties:
+	<property name="Magazine_items" value=""/>
+	<!-- A list of items that this item consumes when firing the ray as defined in items.xml. -->
+	<property name="Infinite_ammo" value="true"/>
+	<!-- If infinite ammo no items get consumed from the magazine. -->
+	<property name="Single_magazine_usage" value="true"/>
+	<!-- If true, there is only one magazine type specified. Used for things like the robotic sledge. -->
+	<property name="Bullet_material" value=""/>
+	<!-- Set to 'bullet' by default, but you can change this to change the sound of what happens when a ray hits another material. -->
+	<property name="SupportHarvesting" value="true"/>
+	<!-- If set to true, when firing the weapon and it breaks resources they will be added to the player inventory. -->
+	<property name="Delay" value="0.0"/>
+	<!-- If set, this is the delay between firing. Better to use the RoundsPerMinute passive effect in an effect group to specify this instead as this property is somewhat obsolete -->
+	<property name="Sound_start" value=""/>
+	<!-- The sound that plays when the item fires a ray as defined in sounds.xml. -->
+	<property name="Sound_loop" value=""/>
+	<!-- If this automatically fires, the sound that should be played on loop over and over. -->
+	<property name="Sound_end" value=""/>
+	<!-- Once the firing stops, this sound plays. -->
+	<property name="Sound_empty" value=""/>
+	<!-- If there are no ammo_items to consume to fire a ray, this sound is played. -->
+	<property name="Sound_reload" value=""/>
+	<!-- The sound that plays when the item is reloading its magazine_items. -->
+	<property name="AutoReload" value="false"/>
+	<!-- Set to true or false. True means the item relaods its magazine_items as soon as the last shot is fired. False means it must first be fired to play the misfire sound or the reload key pressed manually. -->
+	<property name="Particles_muzzle_fire" value=""/>
+	<!-- The particle effect played at the muzzle point when the weapon fires. -->
+	<property name="Particles_muzzle_fire_fpv" value=""/>
+	<!-- The particle effect played as seen from the first person view when the weapon fires. -->
+	<property name="Particles_muzzle_smoke" value=""/>
+	<!-- The particle effect played at the muzzle point after the weapon fires and the muzzle particles are played. -->
+	<property name="Particles_muzzle_smoke_fpv" value=""/>
+	<!-- The particle effect played as seen from the first person view after the weaopn fires and the muzzle particles are played. -->
+	<property name="ScopeOffset" value="0.0,0.0,0.0"/>
+	<!-- Three numbers for the XYZ offset of the scope attachment. -->
+	<property name="SideOffset" value="0.0,0.0,0.0"/>
+	<!-- Three numbers for the XYZ offset of the side attachment. -->
+	<property name="BarrelOffset" value="0.0,0.0,0.0"/>
+	<!-- Three numbers for the XYZ offset of the barrel (determines where the muzzle effect plays and where the ray is fired -->
+
+
+** Repair **
+<!-- Allows the item to repair and upgrade blocks in the world. -->
+<property name="Class" value="Repair"/>
+		
+Additional Properties:
+	<property name="Delay" value="0"/> 
+	<!-- How quickly the item hits the block to upgrade or repair. Repair actions still need the delay amount even though there are passive_effects. -->
+	<property name="Repair_amount" value="0"/>
+	<!-- The amount of HP a block gets repaired by if there is damage. -->
+	<property name="Upgrade_hit_offset" value="0"/>
+	<!-- How many more or less hits the item needs to upgrade a block. Setting to a positive value means this item takes more hits to upgrade the block. Setting to a negative value makes this item need less hits. -->
+	<property name="Sound_start" value="repair_block"/>
+	<!-- The sound used when the block is getting repaired. -->
+	<property name="Allowed_upgrade_items" value=""/>
+	<!-- Comma-separated list of item names that this tool can use to upgrade and repair blocks. -->
+	<property name="UsePowerAttackAnimation" value="false"/>
+	<!-- Whether the power attack animation should be used. -->
+
+
+** SpawnTurret **
+<!-- Places a turret into the world. -->
+<property name="Class" value="SpawnTurret"/>
+
+Additional Properties:
+	<property name="Turret" value=""/>
+	<!-- Name of the turret that gets placed down as specified in entityclasses.xml. -->
+	<property name="PreviewSize" value="1,1,1"/>
+	<!-- Three comma-separated numbers for the XYZ sizing of the turret to place down. -->
+	
+	
+** SpawnVehicle **
+<!-- Places a vehicle in the world. -->
+<property name="Class" value="SpawnVehicle"/>
+		
+Additional Properties:
+	<property name="Vehicle" value=""/>
+	<!-- Name of the vehicle that gets placed in the world as defined in entityclasses.xml -->
+	
+	
+** TextureBlock **
+<!-- Allows the item to paint blocks or remove the texture. Supports all 'Shapes' blocks that do not have a specific model. -->
+<property name="Class" value="TextureBlock"/>
+
+Additional Properties:
+	<property name="Hitmask_override" value=""/>
+	<!-- Determines the collider that the item uses. Possible values are Melee, Arrow, Bullet, Rocket and will be used by a block's Collide property. -->
+	<property name="Sound_start" value=""/>
+	<!-- The sound that is played when the item is used. -->
+	<property name="Sound_loop" value=""/>
+	<!-- If the item has auto fire, the sound that is played when looping. -->
+	<property name="Sound_end" value=""/>
+	<!-- The sound that is played when the item use stops. -->
+	<property name="Infinite_ammo" value="true"/>
+	<!-- Whether the item uses magazine_items or not. -->
+	<property name="Magazine_items" value=""/>
+	<!-- What items are consumed when this item is used. -->
+	<property name="Range" value="0"/>
+	<!-- How far the item can reach. Required for this as it seems passive_effects are not hooked up. -->
+	<property name="Delay" value="0"/>
+	<!-- The time between actions for this item. Required for this as it seems passive_effects are not hooked up. -->
+	<property name="RemoveTexture" value="true"/>
+	<!-- Whether the item should remove the texture instead of painting one on. -->
+	<property name="DefaultTextureID" value="156"/>
+	<!-- The default texture ID if the block in question does not have one specified. -->
+
+
+** ThrowAway **
+<!-- Allows the item to be thrown from the hand without the need of a launcher or catapult. Does NOT deal damage to the environment when it hits, but will make impact sounds. If you want direct damage, use ThrownWeapon. -->
+<property name="Class" value="ThrowAway"/>
+		
+	<property name="Delay" value="0"/> 
+	<!-- How long it takes after use to throw the item. -->
+	<property name="Throw_strength_default" value="0"/>
+	<!-- When starting the throw, this is the minimum strength. -->
+	<property name="Throw_strength_max" value="0"/>
+	<!-- When the throw meter is fully charged, this is the maximum strength. -->
+	<property name="Max_strain_time" value="0" />
+	<!-- How quickly the throw meter charges up, in seconds -->
+	<property name="Sound_start" value=""/>
+	<!-- The sound played when the item is thrown. -->
+	
+	
+** ThrownWeapon **
+<!-- Used for things like spears where you will throw the weapon and it will deal damage to whatever it impacts. -->
+<property name="Class" value="ThrownWeapon"/>
+	
+Additional Properties: 	
+	<property name="Hitmask_override" value=""/>
+	<!-- Determines the collider that the item uses. Possible values are Melee, Arrow, Bullet, Rocket and will be used by a block's Collide property. -->
+	<property name="Delay" value="0"/>
+	<!-- The time it takes for the action to complete. -->
+	<property name="Throw_strength_default" value="0"/>
+	<property name="Throw_strength_default" value="0"/>
+	<!-- When starting the throw, this is the minimum strength. -->
+	<property name="Throw_strength_max" value="0"/>
+	<!-- When the throw meter is fully charged, this is the maximum strength. -->
+	<property name="Max_strain_time" value="0" />
+	<!-- How quickly the throw meter charges up, in seconds -->
+	<property name="Sound_start" value=""/>
+	<!-- The sound played when the item is thrown. -->
+	<property name="Gravity" value="0"/>
+	<!-- How much the gravity affects the projectile after FlyTime. Set to 0 to not have gravity effects. -->
+	<property name="FlyTime" value="1"/>
+	<!-- How far the projectile flies before gravity starts acting on it. -->
+	<property name="LifeTime" value="1"/>
+	<!-- How long the projectile exists before despawning. -->
+	
+Additional Property Classes:
+	** HitSounds **
+	<!-- Controls sound overrides when a full hit is detected. -->
+	<property class="HitSounds">
+		<!-- Additional Properties -->
+	</property>
+	
+	Additional Properties:
+		<property name="Override0" value="" param1=""/>: 
+		<!-- This controls the first override of the hit. You can add as many of these as you want with Override1, Override2, etc. 
+			- value: Value of the matrial that is used to trigger the override, such as organic, metal, wood, etc.
+			- param1: The name of the sound to override with as defined in sounds.xml.
+		-->
+
+
+** UseOther **
+<!-- Essentially the same as 'Eat' but for other entities. The effects get processed on the entity that you use the item on. -->
+<property name="Class" value="UseOther"/>
+		
+Additional Properties:
+	<property name="Delay" value="0"/>
+	<!-- The delay before the item gets consumed. -->
+	<property name="Sound_start" value=""/>
+	<!-- The sound played when the action is performed. -->
+	<property name="Create_item" value=""/>
+	<!-- Adds an item to the inventory as specified in items.xml. -->
+
+
+** Vomit **
+<!-- Like Launcher, but has additional options for zombies such as the cop and mutated zombie. -->
+<property name="Class" value="Vomit"/>
+
+Additional Properties:
+	<property name="Hitmask_override" value=""/>
+	<!-- Determines the collider that the item uses. Possible values are Melee, Arrow, Bullet, Rocket and will be used by a block's Collide property. -->
+	<property name="AnimType" value="1"/>
+	<!-- The animation that plays when the entity is about to launch. -->
+	<property name="Range" value="0"/>
+	<!-- The range that the projectile can travel. -->
+	<property name="SpreadVerticalOffset" value="0"/>
+	<!-- Allows the projectile point to be changed. -->
+	<property name="WarningDelay" value="0"/>
+	<!-- How much delay there is between warning and shooting -->
+	<property name="WarningMax" value="0"/>
+	<!-- Maximum warning time before the projectile is fired. -->
+	<property name="Infinite_ammo" value="true"/>
+	<!-- Whether any magazine_items are consumed from an inventory or not. -->
+	<property name="Magazine_items" value="ammoProjectileZombieMutated"/>
+	<!-- Comma-separated list of items that can be fired. -->
+	<property name="Sound_warning" value=""/>
+	<!-- The sound that is played to warn of the fire. -->
+	<property name="Sound_start" value=""/>
+	<!-- The sound played when the projectile fires. -->
+	<property name="Sound_repeat" value=""/>
+	<!-- The sound that plays for looping projectiles. -->
+	<property name="Sound_end" value=""/>
+	<!-- The sound that plays when the loop ends or after the sound_start has finished. -->
+	<property name="Sound_empty" value=""/>
+	<!-- Sound that plays if no magazine_items are able to be fired. -->
+	<property name="Sound_reload" value=""/>
+	<!-- Sound that plays when relaoding. -->
+
+
+** Zoom **
+<!-- Zooms in the view. -->
+<property name="Class" value="Zoom"/>
+
+Additional Properties:
+	<property name="Zoom_max_out" value="0"/>
+	<!-- When zooming in, this is the maximum zoom. -->
+	<property name="Zoom_max_in" value="0"/>
+	<!-- When zooming in, this is the minimum zoom. -->
+	<property name="ScopeCameraOffset" value="0.0,0.0,0.0"/>
+	<!-- Camera positioning when zooming in. -->
+	
+	
+	
+	
+UMA PROPERTY CLASS FOR CLOTHING, ARMOR AND EQUIPMENT
+When making a piece of clothing or armor, the UMA property class is needed to specify where the item is worn and what mesh / prefab is used.
+<property class="UMA">
+	<property name="Mesh" value="armor_leather_hood"/>
+	<property name="Overlay0" value="plant_fiber_hood"/>
+	<property name="Layer" value="2"/>
+	<property name="UISlot" value="Headgear"/>
+	<property name="Mask0" value="Head" param1="inner"/>
+	<property name="Mask1" value="Head" param1="outer"/>
+</property>
+
+	
+</items_information>
