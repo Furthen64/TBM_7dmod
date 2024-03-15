@@ -53,7 +53,7 @@
 	<property name="StickyColliderUp" value="2"/>
 	<property name="StickyColliderRadius" value=".05"/>
 	<property name="StickyColliderLength" value=".75"/>
-	<property name="Stacknumber" value="150"/> <!-- STK ammo low -->
+	<property name="Stacknumber" value="150"/>  
 	<property name="EconomicValue" value="12"/>
 	<property name="TraderStageTemplate" value="arrowsTier0"/>
 	<property name="EconomicBundleSize" value="5"/>
@@ -78,7 +78,65 @@
 
 
 <!-- New type of arrow heads -->
-<!-- New type of arrow fletching -->
+
+<item name="resourceArrowHeadStoneAO"> <!-- scrap material -->
+	<property name="HoldType" value="45"/> <!-- what is holdtype? -->
+	<property name="Meshfile" value="@:Other/Items/Misc/sackPrefab.prefab"/>
+	<property name="DropMeshfile" value="@:Other/Items/Misc/sack_droppedPrefab.prefab"/>	
+	<property name="Material" value="Mstone"/>
+	<property name="Stacknumber" value="500"/>  	
+	<property name="Weight" value="1"/> <!-- if we scrap it, we get one piece of stone back -->
+	<property name="MeltTimePerUnit" value=".5"/>
+	<property name="EconomicValue" value="50"/>
+	<property name="EconomicBundleSize" value="50"/>
+	<property name="Group" value="Ammo/Weapons,Ammo"/>	
+	<property name="NoScrapping" value="true"/>	
+</item>
+ 
+<item name="resourceArrowHeadBoneAO"> <!-- now do the same for the bonetype-->
+	<property name="HoldType" value="45"/>  
+	<property name="Meshfile" value="@:Other/Items/Misc/sackPrefab.prefab"/>
+	<property name="DropMeshfile" value="@:Other/Items/Misc/sack_droppedPrefab.prefab"/>	
+	<property name="Material" value="MresourceBone"/>
+	<property name="Stacknumber" value="500"/>  	
+	<property name="Weight" value="1"/>  
+	<property name="MeltTimePerUnit" value=".5"/>
+	<property name="EconomicValue" value="50"/>
+	<property name="EconomicBundleSize" value="50"/>
+	<property name="Group" value="Ammo/Weapons,Ammo"/>	
+	<property name="NoScrapping" value="true"/> <!-- found this in items_information.notXML -->
+</item>
+
+
+
+
+<!-- New type of arrow fletching/the wing at back of an arrow -->
+
+<item name="resourceFletchingFeatherAO"> <!-- copied from "resourceFeather" -->
+	<property name="HoldType" value="45"/>	
+	<property name="Meshfile" value="@:Other/Items/Misc/sackPrefab.prefab"/>
+	<property name="DropMeshfile" value="@:Other/Items/Misc/sack_droppedPrefab.prefab"/>
+	<property name="Material" value="MresourceFeather"/>
+	<property name="Stacknumber" value="500"/>  
+	<property name="FuelValue" value="1"/>
+	<property name="EconomicValue" value="5"/>
+	<property name="EconomicBundleSize" value="10"/>
+	<property name="Group" value="Resources"/>
+	<property name="NoScrapping" value="true"/>	
+</item>
+
+<item name="resourceFletchingPaperAO"> 
+	<property name="HoldType" value="45"/>	
+	<property name="Meshfile" value="@:Other/Items/Misc/sackPrefab.prefab"/>
+	<property name="DropMeshfile" value="@:Other/Items/Misc/sack_droppedPrefab.prefab"/>
+	<property name="Material" value="MresourcePaper"/>
+	<property name="Stacknumber" value="500"/>  
+	<property name="FuelValue" value="1"/>
+	<property name="EconomicValue" value="5"/>
+	<property name="EconomicBundleSize" value="10"/>
+	<property name="Group" value="Resources"/>
+	<property name="NoScrapping" value="true"/>	
+</item>
 
 </append>
 

@@ -1,1 +1,13 @@
 key,English
+ammoArrowBoneAO,"Bone Arrow (Ammo)"
+ammoArrowBoneAODesc,"Bone arrows fly a little better than stone, and deal slightly higher damage."
+ammoCrossbowBoltBoneAO,"Bone Crossbow Bolt (Ammo)"
+ammoCrossbowBoltBoneAODesc,"Bone crossbow bolts fly a little better than stone, and deal slightly higher damage."
+resourceArrowHeadStoneAO,"Thing"
+resourceArrowHeadStoneAODesc,"Thing"
+resourceArrowHeadBoneAO,"Thing"
+resourceArrowHeadBoneAODesc,"Thing"
+resourceFletchingFeatherAO,"Thing"
+resourceFletchingFeatherAODesc,"Thing"
+resourceFletchingPaperAO,"Thing"
+resourceFletchingPaperAODesc,"Thing"

@@ -1,0 +1,16 @@
+https://www.youtube.com/watch?v=R6wjHxV8_4I&ab_channel=Zilox
+> Han visar hur man lägger in nytt Italienskt Vapen
+> Pratar om AssetRipper för att få ut assets 
+> Ger oss ett script som gör att det är enkelt att exportera
+  prefab till unity3d formatet!! <3 
+  
+Öppnade Vehicles.bundle i AssetRipper,
+Exporterade alla filer til output\
+
+output\ExportedProject\Assets\Avatar
+* 4x4
+* bicycle
+* gyrocopter
+* minibike
+* motorcycle 
+

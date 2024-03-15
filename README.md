@@ -20,5 +20,10 @@ I edited the Meta XML for this mod:
 tbm-mod-a21\ModletTemplateA21\ModInfo.xml
 
 
+# Unity...
+For the 3d models, I used blender, I also used Unity to convert the 3dmodels from .OBJ to .unity3d object.
+THe guide I followed is... Link please
+
+Download Unity Hub, install the CORRECT version of Unity, I used 2021.3.5 first. then I tried 2021.3.36f1, lets see if that works/2024-03-14
 
 
