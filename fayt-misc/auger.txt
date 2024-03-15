@@ -1,0 +1,47 @@
+items.xml:811:<item name="meleeToolPickT3Auger">
+items.xml:815:	<property name="Meshfile" value="@:Other/Items/Tools/Auger/augerPrefab.prefab"/>
+items.xml:820:	<property name="SoundIdle" value="auger_idle"/>
+items.xml:826:	<property name="UnlockedBy" value="craftingHarvestingTools"/><!-- meleeToolPickT3AugerSchematic, -->
+items.xml:839:		<property name="Sound_start" value="Auger_Fire_Start"/>
+items.xml:840:		<property name="Sound_repeat" value="Weapons/Motorized/Auger/auger_fire_lp"/>
+items.xml:841:		<property name="Sound_end" value="Weapons/Motorized/Auger/auger_fire_end"/>
+items.xml:842:		<property name="Sound_empty" value="auger_empty"/>
+items.xml:843:		<property name="Sound_reload" value="Auger_Reload"/>
+items.xml:856:	<effect_group name="meleeToolPickT3Auger">
+loot.xml:3784:	<item name="meleeToolPickT3Auger"/>
+loot.xml:4196:	<item name="meleeToolPickT3Auger"/>
+loot.xml:7375:	<item name="meleeToolPickT3Auger"/>
+loot.xml:8321:<lootgroup name="twitch_toolauger" count="all">
+loot.xml:8322:	<item name="meleeToolPickT3Auger" />
+loot.xml:8328:	<item group="twitch_toolauger"/>
+misc.xml:24:	<hold_type id="18" newmodel="false" ray_cast="0.5" holster="0" unholster="0.2" two_handed="true" />       <!-- 18 shovel and auger blade -->
+misc.xml:26:	<hold_type id="20" newmodel="false" ray_cast="0.5" holster="0" unholster="0.2" two_handed="true" />       <!-- 20 auger -->
+progression.xml:242:		<display_entry icon="meleeToolPickT3Auger" name_key="harvestToolsMechanical" has_quality="true" unlock_level="60,70,80,90,100" >
+progression.xml:243:			<unlock_entry item="meleeToolPickT3Auger,meleeToolAxeT3Chainsaw" unlock_tier="1" />
+progression.xml:250:			<passive_effect name="RecipeTagUnlocked" operation="base_set" level="60,100" value="1" tags="meleeToolPickT3Auger,meleeToolAxeT3Chainsaw"/>
+progression.xml:255:			<passive_effect name="CraftingTier" operation="base_add" level="70,80,90,100" value="1,2,3,4" tags="meleeToolPickT3Auger,meleeToolAxeT3Chainsaw"/>
+recipes.xml:2027:<recipe name="meleeToolPickT3Auger" count="1" craft_area="workbench" tags="learnable,perkMiner69r,craftingHarvestingTools">
+sounds.xml:10:	4 Auger loop, death screams, Gunshot small?
+sounds.xml:44:<Sequence/> - Adding this to a SoundDataNode changes it from playing random AudioClips into a series of the 3 clips specified in the SoundDataNode to play in succession (used for semi-auto items like AK47 or the Auger).  The first of the 3 AudioClips will play as the startup sound, then the 2nd will play as the looping sound (make sure you specify Loop="True"), and then when the trigger is released the third AudioClip will play.
+sounds.xml:819:	<!-- Auger -->
+sounds.xml:821:<SoundDataNode name="auger_empty"> <AudioSource name="Sounds/AudioSource_Reloads"/>
+sounds.xml:823:	<AudioClip ClipName="Sounds/Weapons/Motorized/Auger/auger_empty"/>
+sounds.xml:824:    <AudioClip ClipName="Sounds/Twitch/Silly/auger_empty_silly" AltSound="true"/>
+sounds.xml:827:<SoundDataNode name="auger_equip"> <AudioSource name="Sounds/AudioSource_Reloads"/>
+sounds.xml:828:	<AudioClip ClipName="Sounds/Weapons/Motorized/Auger/auger_equip"/>
+sounds.xml:829:    <AudioClip ClipName="Sounds/Twitch/Silly/auger_equip_silly" AltSound="true"/>
+sounds.xml:832:<SoundDataNode name="auger_idle">
+sounds.xml:834:    <AudioClip ClipName="Sounds/Weapons/Motorized/Auger/auger_idle" AudioSourceName="Sounds/AudioSource_MotorWeapIdle"/>
+sounds.xml:835:    <AudioClip ClipName="Sounds/Twitch/Silly/auger_idle_silly"  Loop="true" AltSound="true"/>
+sounds.xml:838:<SoundDataNode name="Auger_Fire_Start"> <AudioSource name="Sounds/AudioSource_MotorWeap"/>
+sounds.xml:841:	<AudioClip ClipName="Sounds/Weapons/Motorized/Auger/Auger_Fire_Start"/>
+sounds.xml:842:    <AudioClip ClipName="Sounds/Twitch/Silly/auger_fire_silly_start" AltSound="true"/>
+sounds.xml:843:    <AudioClip ClipName="Sounds/Weapons/Motorized/Auger/auger_fire_lp" Loop="true"/>
+sounds.xml:844:    <AudioClip ClipName="Sounds/Twitch/Silly/auger_fire_silly_lp" Loop="true" AltSound="true"/>
+sounds.xml:845:    <AudioClip ClipName="Sounds/Weapons/Motorized/Auger/auger_fire_end"/>
+sounds.xml:846:    <AudioClip ClipName="Sounds/Twitch/Silly/auger_fire_silly_end" AltSound="true"/>
+sounds.xml:849:<SoundDataNode name="Auger_Reload">
+sounds.xml:851:	<AudioClip ClipName="Sounds/Weapons/Motorized/Auger/Auger_Reload" AudioSourceName="Sounds/Weapons/Motorized/Auger/AugerAudioSource"/>
+sounds.xml:896:<SoundDataNode name="chainsaw_fire_rev"> <AudioSource name="Sounds/Weapons/Motorized/Auger/AugerAudioSource"/> <NetworkAudioSource name="Sounds/AudioSource_WeaponFire_Network"/>
+traders.xml:819:			<!-- <item name="meleeToolPickT3AugerSchematic"/> -->
+traders.xml:1142:			<item name="meleeToolPickT3Auger" quality="2,5"/>
