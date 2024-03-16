@@ -4,7 +4,14 @@ https://www.youtube.com/watch?v=R6wjHxV8_4I&ab_channel=Zilox
 
 > Ger oss ett script som gör att det är enkelt att exportera
   prefab till unity3d formatet!! 
-  Det är bara att lägga det i Unity-projektet för din nya asset.
+  
+  * Import New Asset > välj .cs-skriptet
+  * Högerklicka på din nya Prefab > "Build Multi-platform Assetbundle from Selection"
+    Sparad i C:\github\TBM_7dmod\fayt-misc\Borehead.unity3d
+	
+  * I din mod-mapp, skapa nu Resources/-mapp
+  C:\github\TBM_7dmod\tbm-mod-a21\Resources
+  
   
 Öppnade Vehicles.bundle i AssetRipper,
 Exporterade alla filer til output\

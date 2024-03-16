@@ -1,5 +1,5 @@
 <configs>
-	<append>		
+	<append xpath="/vehicles">	
 		<vehicle name="vehicleBorehead">
 			<property name="cameraDistance" value="5.5, 7"/>
 			<property name="cameraTurnRate" value=".2, .35"/>
@@ -81,7 +81,7 @@
 				<property name="class" value="Steering"/>
 				<property name="slot_type" value="handlebars"/>
 				<property name="transform" value="Origin/steering_joint"/>
-				<property name="steerMaxAngle" value="60"/>
+				<property name="steerMaxAngle" value="2"/>
 				<property name="IKHandLPosition" value="-.154, .1256, .0265"/>
 				<property name="IKHandLRotation" value="37.55, -13.433, 49.88"/>
 				<property name="IKHandRPosition" value=".154, .1256, .0265"/>
