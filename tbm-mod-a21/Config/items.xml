@@ -8,7 +8,7 @@
 		<property name="UnlockedBy" value="craftingVehicles"/>
 		<property name="Tags" value="vehicle,vengine,vfuel,vlight,vseat"/> <!-- Choose available mod types -->
 		<property name="DescriptionKey" value="tbmPlaceableDesc"/> <!-- create below if you like, for now nothing -->		
-		<property name="Meshfile" value="#@modfolder:Resources/Borehead.unity3d.unity3d?tunnelBoringMachineHead.Prefab"/>-->
+		<property name="Meshfile" value="#@modfolder:Resources/Borehead.unity3d?tunnelBoringMachineHead.Prefab"/>-->
 		<property name="DropMeshfile" value="Items/Misc/sack_droppedPrefab"/>
 		<property name="EconomicValue" value="250000"/>
 		<property name="SellableToTrader" value="false"/>
