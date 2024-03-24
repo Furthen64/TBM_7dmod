@@ -12,7 +12,6 @@
 			<property name="tiltDampening" value=".22"/>
 			<property name="tiltDampenThreshold" value="8"/>
 			<property name="tiltUpForce" value="0"/>
-
 			<property name="motorTorque" value="1800, 900"/>
 			<property name="turboScale" value="1.5, 1.3"/>
 			<property name="velocityMax" value="9.33, 9"/>
@@ -23,7 +22,7 @@
 
 			<property name="hornSound" value="suv_horn"/>
 			
-			<!-- TBMTODO: <property name="recipeName" value="vehicle4x4TruckPlaceable" /> -->
+			<property name="recipeName" value="tunnelBoringMachineHeadPlaceable" />
 
 			<property class="chassis">
 				<property name="class" value="Chassis"/>
@@ -80,7 +79,7 @@
 			<property class="handlebars">
 				<property name="class" value="Steering"/>
 				<property name="slot_type" value="handlebars"/>
-				<property name="transform" value="Origin"/>
+				<property name="transform" value="Origin/a"/>
 				<!-- TBMTODO: <property name="transform" value="Origin/steering_joint"/> -->
 				<property name="steerMaxAngle" value="2"/>
 				<property name="IKHandLPosition" value="-.154, .1256, .0265"/>
@@ -139,39 +138,38 @@
 				<property name="IKHandRRotation" value="41, 30, -18"/>
 			</property>
 
-<!--
+
 			<property class="wheel0">
-				<property name="steerTransform" value="Origin/frontLeftWheelStear_joint"/>
-				<property name="tireTransform" value="Origin/frontLeftWheelStear_joint/frontLeftWheel_joint"/>
+				<property name="steerTransform" value="Origin/b"/>
+				<property name="tireTransform" value="Origin/c"/>
 				<property name="tireSuspensionPercent" value="1"/>
 				<property name="torqueScale_motor_brake" value="1, .8"/>
 			</property>
 
 			<property class="wheel1">
-				<property name="steerTransform" value="Origin/frontRightWheelStear_joint"/>
-				<property name="tireTransform" value="Origin/frontRightWheelStear_joint/frontRightWheel_joint"/>
+				<property name="steerTransform" value="Origin/d"/>
+				<property name="tireTransform" value="Origin/e"/>
 				<property name="tireSuspensionPercent" value="1"/>
 				<property name="torqueScale_motor_brake" value="1, .8"/>
 			</property>
 
 			<property class="wheel2">
-				<property name="tireTransform" value="Origin/backLeftWheelJoint"/>
+				<property name="tireTransform" value="Origin/f"/>
 				<property name="tireSuspensionPercent" value="1"/>
 				<property name="torqueScale_motor_brake" value="1, 1"/>
 			</property>
 
 			<property class="wheel3">
-				<property name="tireTransform" value="Origin/backRightWheelJoint"/>
+				<property name="tireTransform" value="Origin/g"/>
 				<property name="tireSuspensionPercent" value="1"/>
 				<property name="torqueScale_motor_brake" value="1, 1"/>
 			</property>			
 			
 			<property class="headlight">
 				<property name="class" value="Headlight"/>
-				<property name="transform" value="Origin/headlight"/>
+				<property name="transform" value="Origin/h"/>
 				<property name="bright" value=".75"/>
 			</property>
--->
 
 			<property class="storage">
 				<property name="class" value="Storage"/>
