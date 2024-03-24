@@ -1,11 +1,12 @@
 <configs>
-	<append xpath="/entity_classes"> 
-		<entity_class name="vehicleTunnelBoringMachine">
+
+	<append xpath="/entity_classes">	
+	
+		<entity_class name="vehicleWheelchair">
 				<property name="Tags" value="vehicle,usesGas"/>
 				<property name="Class" value="EntityVJeep"/>
 				<property name="Parent" value="Cars"/>
-			<!--<property name="Prefab" value="#@modfolder:Resources/moCroniksWheelchair.unity3d?moCroniksWheels"/>-->
-				<property name="Prefab" value="#@modfolder:Resources/Borehead.unity3d?TBMWheels"/> <!-- I *think* I called a part of this vehicle TBMWheels inside Unity... -->
+				<property name="Prefab" value="#@modfolder:Resources/moCroniksWheelchair.unity3d?moCroniksWheels"/>
 				<property name="ModelType" value="Standard"/>
 				<property name="SurfaceCategory" value="metal"/>
 				<property name="IgnoreTrigger" value="true"/>
@@ -18,11 +19,10 @@
 				<property name="Explosion.EntityDamage" value="100"/>
 				<property name="RotateToGround" value="true"/>
 				<property name="Faction" value="none"/>
-				<property name="MapIcon" value="tbmMap"/>
-				<property name="NavObject" value="tbmMap" />
+				<property name="MapIcon" value="wheelchairMap"/>
+				<property name="NavObject" value="wheelchairMap" />
 			</entity_class>
 			
 	</append>
-
-
+	
 </configs>
