@@ -1,5 +1,14 @@
 <configs>
 
-
+	<append xpath="/recipes"> <!-- Standard based on a Motorcycle Vehicle -->
+		
+		<recipe name="tunnelBoringMachineHeadPlaceable" count="1" craft_time="260" craft_area="workbench" tags="learnable,workbenchCrafting"> <!-- from items.xml -->
+			<ingredient name="vehicleWheels" count="4"/>			
+			<ingredient name="vehicleBicycleHandlebars" count="1"/>
+			<ingredient name="smallEngine" count="1"/>
+			<ingredient name="carBattery" count="1"/>
+		</recipe>
+		
+	</append>
 
 </configs>

@@ -1,5 +1,6 @@
 <configs>
-
-
-
+	<append xpath="//crafting_skill[@name='craftingVehicles']/display_entry[@icon='vehicleMinibikePlaceable']/unlock_entry/@item">,tunnelBoringMachineHeadPlaceable</append> <!-- name from items.xml -->
+	<append xpath="//crafting_skill[@name='craftingVehicles']/effect_group">
+		<passive_effect name="RecipeTagUnlocked" operation="base_set" level="20,100" value="1" tags="tunnelBoringMachineHeadPlaceable"/>
+	</append>
 </configs>

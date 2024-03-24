@@ -1,6 +1,6 @@
 <configs>
-	<append xpath="/vehicles">	
-		<vehicle name="vehicleBorehead">
+	<append xpath="/vehicles">
+		<vehicle name="vehicleTunnelBoringMachine"> <!-- see entityclasses.xml -->
 			<property name="cameraDistance" value="5.5, 7"/>
 			<property name="cameraTurnRate" value=".2, .35"/>
 			<property name="upAngleMax" value="70"/>
@@ -23,14 +23,14 @@
 
 			<property name="hornSound" value="suv_horn"/>
 			
-			<property name="recipeName" value="vehicle4x4TruckPlaceable" />
+			<!-- TBMTODO: <property name="recipeName" value="vehicle4x4TruckPlaceable" /> -->
 
 			<property class="chassis">
 				<property name="class" value="Chassis"/>
 				<property name="display_name" value="chassis"/>
 				<property name="slot_type" value="chassis"/>
 				<property name="mesh" value="chassis"/>
-				<property name="transform" value="Origin"/>
+				<property name="transform" value="Origin"/> <!-- Origin is name of a gameobject in Unity prefab -->
 				<property name="paint" value="car_mesh"/>
 			</property>
 
@@ -74,13 +74,14 @@
 
 			<property class="fuelTank">
 				<property name="class" value="FuelTank"/>
-				<property name="capacity" value="400"/>
+				<property name="capacity" value="8000"/>
 			</property>
 
 			<property class="handlebars">
 				<property name="class" value="Steering"/>
 				<property name="slot_type" value="handlebars"/>
-				<property name="transform" value="Origin/steering_joint"/>
+				<property name="transform" value="Origin"/>
+				<!-- TBMTODO: <property name="transform" value="Origin/steering_joint"/> -->
 				<property name="steerMaxAngle" value="2"/>
 				<property name="IKHandLPosition" value="-.154, .1256, .0265"/>
 				<property name="IKHandLRotation" value="37.55, -13.433, 49.88"/>
@@ -138,6 +139,7 @@
 				<property name="IKHandRRotation" value="41, 30, -18"/>
 			</property>
 
+<!--
 			<property class="wheel0">
 				<property name="steerTransform" value="Origin/frontLeftWheelStear_joint"/>
 				<property name="tireTransform" value="Origin/frontLeftWheelStear_joint/frontLeftWheel_joint"/>
@@ -162,13 +164,14 @@
 				<property name="tireTransform" value="Origin/backRightWheelJoint"/>
 				<property name="tireSuspensionPercent" value="1"/>
 				<property name="torqueScale_motor_brake" value="1, 1"/>
-			</property>
-
+			</property>			
+			
 			<property class="headlight">
 				<property name="class" value="Headlight"/>
 				<property name="transform" value="Origin/headlight"/>
 				<property name="bright" value=".75"/>
 			</property>
+-->
 
 			<property class="storage">
 				<property name="class" value="Storage"/>
