@@ -5,7 +5,7 @@
 				<property name="Class" value="EntityVJeep"/>
 				<property name="Parent" value="Cars"/>
 			<!--<property name="Prefab" value="#@modfolder:Resources/moCroniksWheelchair.unity3d?moCroniksWheels"/>-->
-				<property name="Prefab" value="#@modfolder:Resources/Borehead.unity3d?TBMWheels"/> <!-- I *think* I called a part of this vehicle TBMWheels inside Unity... -->
+				<property name="Prefab" value="#@modfolder:Resources/Borehead.unity3d?tunnelBoringMachineHead"/> <!-- I *think* I called a part of this vehicle TBMWheels inside Unity... -->
 				<property name="ModelType" value="Standard"/>
 				<property name="SurfaceCategory" value="metal"/>
 				<property name="IgnoreTrigger" value="true"/>
