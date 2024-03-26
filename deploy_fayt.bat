@@ -27,7 +27,7 @@ if exist %foldermod%\ (
 
 :DELETING_FOLDER
 echo Deleting folder %foldermod% ?
-@RD /s %foldermod% 
+@RD /s /q %foldermod% 
 mkdir %foldermod%
 
 
@@ -40,4 +40,4 @@ robocopy /e %foldergithubrepo% %foldermod%
 :END
 echo Ending
 endlocal
-pause
+

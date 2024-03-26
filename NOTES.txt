@@ -1,0 +1,9 @@
+NOTES medans jag försökte få in modellen i spelet som bil:
+
+I UNity, jag copy pejsta lite hur som haver 
+
+* Physics > Rigidbody!!!
+
+* jag lde till en ny physics-material, kallade den "VehiclePhysicsMat"
+och lade den på alla Wheel-objekt under Physics/
+

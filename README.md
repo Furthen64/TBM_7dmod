@@ -22,8 +22,12 @@ tbm-mod-a21\ModletTemplateA21\ModInfo.xml
 
 # Unity...
 For the 3d models, I used blender, I also used Unity to convert the 3dmodels from .OBJ to .unity3d object.
-THe guide I followed is... Link please
+The guide I followed is... Link please
 
 Download Unity Hub, install the CORRECT version of Unity, I used 2021.3.5 first. then I tried 2021.3.36f1, lets see if that works/2024-03-14
+
+# Making a vehicle for 7days
+This unlisted video from 5 years ago should help:
+https://www.youtube.com/watch?v=1qlX15Kste0&ab_channel=DUST2DEATH
 
 

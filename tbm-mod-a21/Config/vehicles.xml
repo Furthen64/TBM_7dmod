@@ -30,7 +30,7 @@
 				<property name="slot_type" value="chassis"/>
 				<property name="mesh" value="chassis"/>
 				<property name="transform" value="Origin"/> <!-- Origin is name of a gameobject in Unity prefab -->
-				<property name="paint" value="car_mesh"/>
+				<property name="paint" value="Origin/body"/>
 			</property>
 
 			<property class="engine">
