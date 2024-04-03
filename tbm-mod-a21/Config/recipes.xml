@@ -1,14 +1,11 @@
 <configs>
-
-	<append xpath="/recipes"> <!-- Standard based on a Motorcycle Vehicle -->
-		
-		<recipe name="tunnelBoringMachineHeadPlaceable" count="1" craft_time="260" craft_area="workbench" tags="learnable,workbenchCrafting"> <!-- from items.xml -->
-			<ingredient name="vehicleWheels" count="4"/>			
-			<ingredient name="vehicleBicycleHandlebars" count="1"/>
-			<ingredient name="smallEngine" count="1"/>
-			<ingredient name="carBattery" count="1"/>
-		</recipe>
-		
-	</append>
-
+<append xpath="/recipes"> <!-- Standard based on a 4x4 Vehicle -->
+<recipe name="vehicleFrubPlaceable" count="1" craft_time="210" craft_area="workbench" tags="workbenchCrafting">
+<ingredient name="vehicleWheels" count="4"/>
+<ingredient name="vehicle4x4TruckChassis" count="1"/>
+<ingredient name="vehicle4x4TruckAccessories" count="1"/>
+<ingredient name="smallEngine" count="1"/>
+<ingredient name="carBattery" count="1"/>
+</recipe>
+</append>
 </configs>

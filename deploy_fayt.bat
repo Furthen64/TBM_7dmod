@@ -41,3 +41,5 @@ robocopy /e %foldergithubrepo% %foldermod%
 echo Ending
 endlocal
 
+
+pause

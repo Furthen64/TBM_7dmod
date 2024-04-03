@@ -1,2 +1,6 @@
-key,English
-tbmPlaceableDesc,"Yooo"
+Key,Source,Context,Changes,English,French,German,Klingon,Spanish,Polish
+
+<!-- ###### VEHICLE NEW ###### -->
+vehicleFrub,vehicles,vehicle,new, New Frub,,,,,
+vehicleFrubPlaceable,vehicles,item,EnChanged, Frub,,,,,
+vehicleFrubPlaceableDesc,vehicles,item,EnChanged,A custom frub to craft.,,,,,
