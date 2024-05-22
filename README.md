@@ -31,3 +31,14 @@ This unlisted video from 5 years ago should help:
 https://www.youtube.com/watch?v=1qlX15Kste0&ab_channel=DUST2DEATH
 
 
+
+# Using DMT, ModdingTool
+https://github.com/HAL-NINE-THOUSAND
+
+"An open source replacement for SDX focused on 7 Days to Die."
+
+
+# Adding Scripts to Prefab
+https://community.7daystodie.com/topic/11201-c-custom-script-help/
+https://7d2dsdx.github.io/Tutorials/index.html?Introduction.html
+https://github.com/7D2DSDX/Mods/

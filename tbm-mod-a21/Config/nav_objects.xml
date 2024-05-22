@@ -1,0 +1,16 @@
+<configs>
+	<append xpath="/nav_object_classes">
+
+
+		<nav_object_class name="tbmMap" extends="bicycle"> <!-- naming rule ###Map -->
+			<property name="requirement_type" value="IsVehicleOwner"/>
+			<compass_settings>
+				<property name="sprite_name" value="tbmMap"/>	<!-- match the png file in UIAtlases\UIAtlas\ -->
+			</compass_settings>
+			<onscreen_settings>
+				<property name="sprite_name" value="tbmMap"/>
+			</onscreen_settings>
+		</nav_object_class>
+
+	</append>
+</configs>

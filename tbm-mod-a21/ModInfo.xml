@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xml>
-    <Name value="TBMMod" /> 
-    <DisplayName value="TBM test" />
-    <Version value="21.0.1.100" compat="A21"/> <!-- can this be the reason?? -->
-    <Description value="Add Guppy's Taxi to the game" /> <!-- (Optional) More text to show on UIs -->
-    <Author value="You" />
-    <Website value="https://community.7daystodie.com"/> 
+
+	<Name value="TBMMod" /> 
+	<DisplayName value="TBM test" />
+	<Version value="21.0.1.100" compat="A21"/> <!-- make sure this is correct! -->
+	<Description value="Adds a tunnel boring machine to the game" /> <!-- (Optional) More text to show on UIs -->
+	<Author value="Fayt64 and Kanonmat" />
+	<Website value="https://community.7daystodie.com"/> 
+
 </xml>
+

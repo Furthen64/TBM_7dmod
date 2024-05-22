@@ -1,13 +1,12 @@
-<configs>
-
+<configs> 
 	<append xpath="/items">
 	<item name="vehicleFrubPlaceable"><!-- needs to follow naming rule: vehicle####Placeable -->
 			<property name="CustomIcon" value="tbmIcon"/>
 			<property name="Extends" value="vehicleMinibikePlaceable"/>
 			<property name="Tags" value="vehicle,vengine,vfuel,vlight,vseat,canHaveCosmetic"/>
 			<property name="DescriptionKey" value="vehicleFrubPlaceableDesc"/> <!-- this key in localization -->
-			<property name="Meshfile" value="#@modfolder:Resources/frubshit.unity3d?frub"/> <!-- Resources/yourfile.unity3d?name_of_prefab -->
-			<property name="DropMeshfile" value="Items/Misc/sack_droppedPrefab"/>
+			<property name="Meshfile" value="#@modfolder:Resources/tbm.unity3d?frub"/> <!-- Resources/yourfile.unity3d?name_of_prefab -->
+			<property name="DropMeshfile" value="@:Other/Items/Misc/sack_droppedPrefab.prefab"/>			
 			<property name="EconomicValue" value="15000"/>
 			<property name="TraderStageTemplate" value="vehicleTier4"/>
 			<property class="Action1">

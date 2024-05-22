@@ -4,7 +4,7 @@
 			<property name="Tags" value="vehicle,usesGas"/>
 			<property name="Class" value="EntityVJeep"/>
 			<property name="Parent" value="Cars"/>
-			<property name="Prefab" value="#@modfolder:Resources/frubshit.unity3d?frub"/>
+			<property name="Prefab" value="#@modfolder:Resources/tbm.unity3d?frub"/>
 			<property name="ModelType" value="Standard"/>
 			<property name="SurfaceCategory" value="metal"/>
 			<property name="IgnoreTrigger" value="true"/>
@@ -17,8 +17,8 @@
 			<property name="Explosion.EntityDamage" value="100"/>
 			<property name="RotateToGround" value="true"/>
 			<property name="Faction" value="none"/>
-			<property name="MapIcon" value="tbmMap"/>
-			<property name="NavObject" value="4x4" />
+			<property name="MapIcon" value="tbmMap"/> <!-- looks for png in UIAtlases\ItemIconAtlas\ -->
+			<property name="NavObject" value="tbmMap" /> <!-- requires that you added to nav_objects.xml -->
 		</entity_class>
 	</append>
 </configs> 
